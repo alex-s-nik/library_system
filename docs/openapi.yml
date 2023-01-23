@@ -1,0 +1,65 @@
+openapi: '3.0.2'
+info:
+  title: Library API
+  version: '1.0'
+servers:
+  - url: https://127.0.0.1/api/v1/
+paths:
+  /auth/token/login/:
+    post:
+      operationId: Получить токен авторизации
+      description: Используется для авторизации, чтобы в дальнейшем использовать токен при запросах.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenCreateResponseSuccess'
+          description: Токен получен
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenCreateResponseFail'
+          description: Ошибка получения токена
+      tags:
+        - Пользователи
+
+components:
+  schemas:
+    TokenCreate:
+      type: object
+      properties:
+        username:
+          type: string
+          example: root
+          description: Имя пользователя
+        password:
+          type: string
+          example: P@ssw0rd
+          description: Пароль
+      required:
+        - username
+        - password
+    TokenCreateResponseSuccess:
+      type: object
+      properties:
+        auth_token:
+          type: string
+          example: 1c8542042b565f2d5bdc951b5995decf998b054d
+          description: Токен авторизации
+    TokenCreateResponseFail:
+      type: object
+      properties:
+        non_field_errors:
+          type: string
+          example: Unable to log in with provided credentials.
+          description: Описание ошибки
+        
+        
