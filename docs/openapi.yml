@@ -21,7 +21,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TokenCreateResponseSuccess'
-          description: Токен получен
+          description: Успешное получение токена
         '400':
           content:
             application/json:
@@ -30,6 +30,306 @@ paths:
           description: Ошибка получения токена
       tags:
         - Пользователи
+  /api/auth/token/logout/:
+    post:
+      security:
+        - Token: []
+      operationId: Удаление токена
+      description: Удаляет токен текущего пользователя
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+      responses:
+        '204':
+          content:
+            application/json:
+              schema: {}
+          description: Успешное удаление токена
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+      tags:
+        - Пользователи
+
+  /api/books/:
+    get:
+      security:
+        - Token: []
+      operationId: Список книг
+      description: Доступно авторизованному пользователю
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+          description: Успешное получение списка книг
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied' 
+      tags:
+        - Книги
+    post:
+      security:
+        - Token: []
+      operationId: Создание книги
+      description: Доступно LIBRARIAN или ADMIN
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookCreateUpdate'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: Книга успешно создана
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+      tags:
+        - Книги
+  /api/books/{id}:
+    get:
+      security:
+        - Token: []
+      operationId: Получение книги
+      description: Доступно авторизованному пользователю
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор книги
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: Успешный запрос
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Книги
+    patch:
+      security:
+        - Token: []
+      operationId: Обновление данных о книге
+      description: Доступно LIBRARIAN или ADMIN
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор книги
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookCreateUpdate'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: Книга успешно создана
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Книги
+    delete:
+      security:
+        - Token: []
+      operationId: Удаление книги
+      description: Доступно LIBRARIAN или ADMIN
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор книги
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Книга успешно удалена
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Книги
+      
+  /api/visitors/:
+    get:
+      security:
+        - Token: []
+      operationId: Список посетителей
+      description: Доступно авторизованному пользователю
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Visitor'
+          description: Успешное получение списка посетителей
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied' 
+      tags:
+        - Посетители
+    post:
+      security:
+        - Token: []
+      operationId: Создание посетителя
+      description: Доступно авторизованному пользователю
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitorCreateUpdate'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visitor'
+          description: Посетитель успешно создан
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+      tags:
+        - Посетители
+  /api/visitors/{id}:
+    get:
+      security:
+        - Token: []
+      operationId: Получение посетителя
+      description: Доступно авторизованному пользователю
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор поестителя
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visitor'
+          description: Успешный запрос
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Посетители
+    patch:
+      security:
+        - Token: []
+      operationId: Обновление данных о посетителе
+      description: Доступно авторизованному пользователю
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор посетителя
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitorCreateUpdate'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visitor'
+          description: Посетитель успешно создан
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Посетители
+    delete:
+      security:
+        - Token: []
+      operationId: Удаление посетителя
+      description: Доступно авторизованному пользователю
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор книги
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Посетитель успешно удален
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Посетители
+
+
+
 
 components:
   schemas:
@@ -61,5 +361,135 @@ components:
           type: string
           example: Unable to log in with provided credentials.
           description: Описание ошибки
-        
+    AuthenticationError:
+      description: Пользователь не авторизован
+      type: object
+      properties:
+        detail:
+          type: string
+          example: Authentication credentials were not provided.
+          description: Описание ошибки
+    NotFound:
+      description: Объект не найден
+      type: object
+      properties:
+        detail:
+          description: Описание ошибки
+          example: Страница не найдена.
+          type: string
+    PermissionDenied:
+      description: Недостаточно прав
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Описание ошибки
+          example: У вас недостаточно прав для выполнения данного действия.
+    ValidationError:
+      description: Стандартные ошибки валидации DRF
+      type: object
+      properties:
+        field_name:
+          description: 'Название поля, в котором произошли ошибки. Таких полей может быть несколько'
+          example: [ 'Обязательное поле.' ]
+          type: array
+          items:
+            type: string
+    
+    Book:
+      description: Книга в библиотеке
+      type: object
+      properties:
+        id:
+          description: Уникальный ID
+          type: integer
+          example: 1
+        title:
+          description: Название книги
+          type: string
+          example: Проектирование веб-API | Лоре Арно
+        description:
+          description: Описание и другие заметки о книге
+          type: string
+          example: API позволяет разработчикам выполнять интеграцию с приложением без детализированного знания кода. Независимо от того, используете ли вы установленные стандарты, такие как REST и OpenAPI, или более новые подходы, например GraphQL или gRPC, освоение разработки API – своего рода суперспособность. Благодаря ней пользоваться вашими веб-сервисами станет легче, и ваши клиенты – как внутренние, так и внешние – останутся довольны.
+        in_library:
+          description: Книга находится в библиотеке
+          type: boolean
+    BookCreateUpdate:
+      description: Создание или обновление книги
+      type: object
+      properties:
+        title:
+          description: Название книги
+          type: string
+          example: Проектирование веб-API | Лоре Арно
+        description:
+          description: Описание и другие заметки о книге
+          type: string
+          example: API позволяет разработчикам выполнять интеграцию с приложением без детализированного знания кода. Независимо от того, используете ли вы установленные стандарты, такие как REST и OpenAPI, или более новые подходы, например GraphQL или gRPC, освоение разработки API – своего рода суперспособность. Благодаря ней пользоваться вашими веб-сервисами станет легче, и ваши клиенты – как внутренние, так и внешние – останутся довольны.
+
+    Visitor:
+      description: Посетитель
+      type: object
+      properties:
+        id:
+          description: Уникальный ID
+          type: integer
+          example: 1
+        name:
+          description: Имя посетителя
+          type: string
+          example: Иванов Иван Иванович
+        info:
+          description: Описание и другие заметки о посетителе
+          type: string
+          example: телефон 8-900-444-44-44
+    VisitorCreateUpdate:
+      description: Создание или обновление книги
+      type: object
+      properties:
+        name:
+          description: Имя посетителя
+          type: string
+          example: Иванов Иван Иванович
+        info:
+          description: Описание и другие заметки о посетителе
+          type: string
+          example: телефон 8-900-444-44-44
+
+
+  responses:
+    AuthenticationError:
+      description: Пользователь не авторизован
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationError'
+    NotFound:
+      description: Объект не найден
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFound'
+    PermissionDenied:
+      description: Недостаточно прав
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PermissionDenied'
+    ValidationError:
+      description: 'Ошибки валидации в стандартном формате DRF'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+
+  securitySchemes:
+    Token:
+      description: 'Авторизация по токену. <br>
+      Все запросы от имени пользователя должны выполняться с заголовком "Authorization: Token TOKENVALUE"<br>
+      Например, "Authorization: Token 1c8542042b565f2d5bdc951b5995decf998b054d"'
+      type: http
+      scheme: token
+
         
