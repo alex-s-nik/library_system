@@ -328,7 +328,68 @@ paths:
       tags:
         - Посетители
 
-
+  /api/books/{book_id}/taken_by/{visitor_id}:
+    post:
+      security:
+        - Token: []
+      operationId: Выдача книги
+      description: Доступно авторизованному пользователю
+      parameters: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionTakeBook'
+          description: Книга успешно выдана
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+      tags:
+        - Действия
+  /api/books/{book_id}/was_returned:
+    post:
+      security:
+        - Token: []
+      operationId: Возврат книги
+      description: Доступно авторизованному пользователю
+      parameters: []
+      responses:
+        '200':
+          description: Книга успешно возвращена
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+      tags:
+        - Действия
+  /api/books/{visitor_id}:
+    get:
+      security:
+        - Token: []
+      operationId: Книги посетителя
+      description: Доступно авторизованному пользователю
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitorBooks'
+          description: Список книг посетителя
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthenticationError'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+      tags:
+        - Книги
 
 
 components:
@@ -415,6 +476,22 @@ components:
         in_library:
           description: Книга находится в библиотеке
           type: boolean
+    BookWithoutStatus:
+      description: Книга в библиотеке
+      type: object
+      properties:
+        id:
+          description: Уникальный ID
+          type: integer
+          example: 1
+        title:
+          description: Название книги
+          type: string
+          example: Проектирование веб-API | Лоре Арно
+        description:
+          description: Описание и другие заметки о книге
+          type: string
+          example: API позволяет разработчикам выполнять интеграцию с приложением без детализированного знания кода. Независимо от того, используете ли вы установленные стандарты, такие как REST и OpenAPI, или более новые подходы, например GraphQL или gRPC, освоение разработки API – своего рода суперспособность. Благодаря ней пользоваться вашими веб-сервисами станет легче, и ваши клиенты – как внутренние, так и внешние – останутся довольны.
     BookCreateUpdate:
       description: Создание или обновление книги
       type: object
@@ -427,6 +504,27 @@ components:
           description: Описание и другие заметки о книге
           type: string
           example: API позволяет разработчикам выполнять интеграцию с приложением без детализированного знания кода. Независимо от того, используете ли вы установленные стандарты, такие как REST и OpenAPI, или более новые подходы, например GraphQL или gRPC, освоение разработки API – своего рода суперспособность. Благодаря ней пользоваться вашими веб-сервисами станет легче, и ваши клиенты – как внутренние, так и внешние – останутся довольны.
+    BookWithAction:
+      description: Книга для посетителя с действием
+      type: object
+      properties:
+        id:
+          description: Уникальный ID
+          type: integer
+          example: 1
+        title:
+          description: Название книги
+          type: string
+          example: Проектирование веб-API | Лоре Арно
+        description:
+          description: Описание и другие заметки о книге
+          type: string
+          example: API позволяет разработчикам выполнять интеграцию с приложением без детализированного знания кода. Независимо от того, используете ли вы установленные стандарты, такие как REST и OpenAPI, или более новые подходы, например GraphQL или gRPC, освоение разработки API – своего рода суперспособность. Благодаря ней пользоваться вашими веб-сервисами станет легче, и ваши клиенты – как внутренние, так и внешние – останутся довольны.
+        action:
+          description: Действие с книгой
+          type: string
+          example: TAKE
+    
 
     Visitor:
       description: Посетитель
@@ -456,6 +554,40 @@ components:
           description: Описание и другие заметки о посетителе
           type: string
           example: телефон 8-900-444-44-44
+    VisitorBooks:
+      description: Книги посетителя
+      type: object
+      properties:
+        visitor:
+          description: Посетитель
+          type: object
+          $ref: '#/components/schemas/Visitor'
+        books:
+          description: Книги
+          type: array
+          items:
+            $ref: '#/components/schemas/BookWithAction'
+    
+    ActionTakeBook:
+      description: Выдача книги
+      type: object
+      properties:
+        id:
+          description: Уникальный ID
+          type: integer
+          example: 1
+        visitor:
+          description: Посетитель, которому выдана книга
+          type: object
+          $ref: '#/components/schemas/Visitor'
+        book:
+          description: Книга, которая выдана посетителю
+          type: object
+          $ref: '#/components/schemas/BookWithoutStatus'
+        date:
+          description: Дата и время выдачи
+          type: string
+          example: 2023-01-26 15:10
 
 
   responses:
