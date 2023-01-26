@@ -30,7 +30,7 @@ paths:
           description: Ошибка получения токена
       tags:
         - Пользователи
-  /api/auth/token/logout/:
+  /auth/token/logout/:
     post:
       security:
         - Token: []
@@ -52,7 +52,7 @@ paths:
       tags:
         - Пользователи
 
-  /api/books/:
+  /books/:
     get:
       security:
         - Token: []
@@ -100,7 +100,7 @@ paths:
           $ref: '#/components/responses/PermissionDenied'
       tags:
         - Книги
-  /api/books/{id}:
+  /books/{id}:
     get:
       security:
         - Token: []
@@ -190,7 +190,7 @@ paths:
       tags:
         - Книги
       
-  /api/visitors/:
+  /visitors/:
     get:
       security:
         - Token: []
@@ -238,7 +238,7 @@ paths:
           $ref: '#/components/responses/PermissionDenied'
       tags:
         - Посетители
-  /api/visitors/{id}:
+  /visitors/{id}:
     get:
       security:
         - Token: []
@@ -328,7 +328,7 @@ paths:
       tags:
         - Посетители
 
-  /api/books/{book_id}/taken_by/{visitor_id}:
+  /books/{book_id}/taken_by/{visitor_id}:
     post:
       security:
         - Token: []
@@ -350,7 +350,7 @@ paths:
           $ref: '#/components/responses/PermissionDenied'
       tags:
         - Действия
-  /api/books/{book_id}/was_returned:
+  /books/{book_id}/was_returned:
     post:
       security:
         - Token: []
@@ -368,7 +368,7 @@ paths:
           $ref: '#/components/responses/PermissionDenied'
       tags:
         - Действия
-  /api/books/{visitor_id}:
+  /books/{visitor_id}:
     get:
       security:
         - Token: []
