@@ -1,0 +1,24 @@
+<div class="actions">
+    <a href="#" class="btn btn-outline-primary">Добавить посетителя</a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <table class="visitors-list table table-hover book-list-main">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Заметка</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let visitor of visitors" [routerLink]="['/visitors', visitor.id ]">
+                    <th scope="row">{{ visitor.id }}</th>
+                    <td>{{ visitor.name }}</td>
+                    <td>{{ visitor.info }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

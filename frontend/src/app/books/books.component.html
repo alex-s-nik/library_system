@@ -1,0 +1,26 @@
+<div class="actions">
+    <div class="card">
+        <div class="card-body">
+            <a href="#" class="btn btn-outline-primary">Добавить книгу</a>
+            <a href="#" class="btn btn-outline-primary">Добавить журнал</a>
+            <a href="#" class="btn btn-outline-primary">Добавить газету</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover book-list-main">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Аннотация</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of books">
+            <th scope="row">{{ book.id }}</th>
+            <td>{{ book.title }}</td>
+            <td>{{ book.description }}</td>
+        </tr>
+    </tbody>
+</table>
