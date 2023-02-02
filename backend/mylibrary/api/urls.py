@@ -1,9 +1,15 @@
 from django.urls import include, path
 from rest_framework.routers import SimpleRouter
 
-from api.views import VisitorViewSet
+from api.views import BookViewSet, VisitorViewSet
 
 router = SimpleRouter()
+
+router.register(
+    'books',
+    BookViewSet,
+    basename = 'Books'
+)
 
 router.register(
     'visitors',
