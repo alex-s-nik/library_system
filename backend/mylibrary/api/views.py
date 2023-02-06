@@ -63,7 +63,15 @@ class BookViewSet(CreatedByMixin, viewsets.ModelViewSet):
         # group by book_id
         # 
         # from django.db.models import Max
-        # History.objects.values('book').annotate(last_action_time=Max('created_at'))
+        # h = History.objects.values('book').annotate(last_action_time=Max('created_at')).filter(action_type=ActionType.TAKE)
+
+        # queryset = Book.objects.all()
+        # queryset.annotate(
+        #   in_library=Case(
+        #       When(id__in=h, then=Value('False')),
+        #       default=Value('True')
+        #   )
+        # ).filter(in_library=True)
 
 
 
