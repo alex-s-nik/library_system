@@ -46,8 +46,26 @@ class BookViewSet(CreatedByMixin, viewsets.ModelViewSet):
         methods=['post'],
         permission_classes = (IsAuthenticated,)
     )
-    def was_returned(self, request, id=None):
-        ...
+    def was_returned(self, request, pk=None):
+        book = get_object_or_404(Book, id=pk)
+        # find the book in history which has status 'take' and has the latest date of taken
+        # select h.*
+        # from (
+        #   select book_id, max(created_at) as last_action_time
+        #   from history
+        #   group by book_id
+        # ) b
+        # inner join history h on h.book_id=b.book_id and h.created_at=b.last_action_time
+        # where h.action_type=TAKE
+
+        # select book_id, max(created_at) as last_action_time
+        # from history
+        # group by book_id
+        # 
+        # from django.db.models import Max
+        # History.objects.values('book').annotate(last_action_time=Max('created_at'))
+
+
 
 
 class VisitorViewSet(CreatedByMixin, viewsets.ModelViewSet):
