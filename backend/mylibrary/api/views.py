@@ -73,6 +73,9 @@ class BookViewSet(CreatedByMixin, viewsets.ModelViewSet):
         #   )
         # ).filter(in_library=True)
 
+        # h1 = History.objects.filter(created_at=Subquery(History.objects.filter(book=OuterRef('book')).values('book').annotate(max_date=Max('created_at')).values('max_date')[:1])).filter(action_type=ActionType.TAKE)
+        # books_not_in_library = Book.objects.filter(history__in=h1)
+
 
 
 
