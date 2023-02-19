@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError as DjangoValidationError, ObjectDoesNotExist
-from django.db.models import Max, OuterRef, Subquery
+from django.db.models import F, Max, OuterRef, Subquery
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.permissions import IsLibrarianAndAbove
-from api.serializers import BookSerializer, HistorySerializer, VisitorSerializer
+from api.serializers import BookSerializer, HistorySerializer, VisitorSerializer, VisitorDebtSerializer
 from library.models import ActionType, Book, History, Visitor
 
 
@@ -112,7 +112,7 @@ class VisitorViewSet(CreatedByMixin, viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=['post'],
+        methods=['get'],
         permission_classes=(IsAuthenticated,)
     )
     def books(self, request, pk=None):
@@ -124,3 +124,17 @@ class VisitorViewSet(CreatedByMixin, viewsets.ModelViewSet):
                     max_date=Max('created_at')
             ).values('max_date')[:1])
         ).filter(action_type=ActionType.TAKE)
+
+        books_taken_by_visitor = Book.objects.filter(
+            id__in=history_with_last_taken_books.filter(visitor=pk).values('book')
+        ).annotate(
+            taken_at=F('history__created_at')
+        )
+        return Response(
+            VisitorDebtSerializer(
+                {
+                    'visitor': Visitor.objects.get(id=pk),
+                    'books': books_taken_by_visitor
+                }
+            ).data, status=status.HTTP_200_OK
+        )
