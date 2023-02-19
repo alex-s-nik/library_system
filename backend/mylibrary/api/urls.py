@@ -5,20 +5,12 @@ from api.views import BookViewSet, VisitorViewSet
 
 router = SimpleRouter()
 
-router.register(
-    'books',
-    BookViewSet,
-    basename = 'Books'
-)
+router.register("books", BookViewSet, basename="Books")
 
-router.register(
-    'visitors',
-    VisitorViewSet,
-    basename = 'Visitors'
-)
+router.register("visitors", VisitorViewSet, basename="Visitors")
 
 
 urlpatterns = [
-    path('auth/', include('djoser.urls.authtoken')),
-    path('', include(router.urls)),
+    path("auth/", include("djoser.urls.authtoken")),
+    path("", include(router.urls)),
 ]
