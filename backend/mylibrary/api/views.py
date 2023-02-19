@@ -1,4 +1,5 @@
-from django.core.exceptions import ValidationError as DjangoValidationError
+from django.core.exceptions import ValidationError as DjangoValidationError, ObjectDoesNotExist
+from django.db.models import Max, OuterRef, Subquery
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -73,8 +74,33 @@ class BookViewSet(CreatedByMixin, viewsets.ModelViewSet):
         #   )
         # ).filter(in_library=True)
 
-        # h1 = History.objects.filter(created_at=Subquery(History.objects.filter(book=OuterRef('book')).values('book').annotate(max_date=Max('created_at')).values('max_date')[:1])).filter(action_type=ActionType.TAKE)
-        # books_not_in_library = Book.objects.filter(history__in=h1)
+        history_with_last_taken_books = History.objects.filter(
+            created_at=Subquery(
+                History.objects.filter(
+                    book=OuterRef('book')
+                ).values('book').annotate(
+                    max_date=Max('created_at')
+            ).values('max_date')[:1])
+        ).filter(action_type=ActionType.TAKE)
+
+        try:
+            record_with_current_book = history_with_last_taken_books.get(
+                book=book
+            )
+        # Book is in library, not taken
+        except ObjectDoesNotExist:
+            raise DRFValidationError('Книга еще не выдавалась.')
+
+        
+        visitor = record_with_current_book.visitor
+        history_obj = History.objects.create(
+            book=book,
+            visitor=visitor,
+            action_type=ActionType.RETURN,
+            created_by=request.user
+        )
+        return Response(HistorySerializer(history_obj).data, status=status.HTTP_201_CREATED)
+
 
 
 
@@ -89,5 +115,12 @@ class VisitorViewSet(CreatedByMixin, viewsets.ModelViewSet):
         methods=['post'],
         permission_classes=(IsAuthenticated,)
     )
-    def books(self, request, id=None):
-        ...
+    def books(self, request, pk=None):
+        history_with_last_taken_books = History.objects.filter(
+            created_at=Subquery(
+                History.objects.filter(
+                    book=OuterRef('book')
+                ).values('book').annotate(
+                    max_date=Max('created_at')
+            ).values('max_date')[:1])
+        ).filter(action_type=ActionType.TAKE)
