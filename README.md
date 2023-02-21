@@ -17,3 +17,23 @@
 - Библиотекарь - может то же, что и Обычный пользователь, плюс CRUD книги
 
 - Главный пользователь/администратор - может то же, что и Библиотекарь, плюс имеет доступ к админке, где также может управлять пользователями.
+
+### Запуск сервера
+Python >= 3.8 (```python --version```)
+
+Для Windows-систем
+
+```
+>>> cd backend
+>>> python -m venv venv
+>>> cd venv/scripts/
+>>> activate.bat
+>>> (venv) cd ../..
+>>> (venv) pip install -r requirements.txt
+>>> (venv) cd mylibrary
+>>> (venv) python manage.py migrate
+>>> (venv) python manage.py createsuperuser
+>>> (venv) python manage.py runserver
+```
+По умолчанию сервер будет доступен по адресу 
+```127.0.0.1:8000```
