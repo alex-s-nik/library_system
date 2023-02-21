@@ -57,7 +57,7 @@ paths:
       security:
         - Token: []
       operationId: Список книг
-      description: Доступно авторизованному пользователю
+      description: Список всех книг
       parameters: []
       responses:
         '200':
@@ -78,7 +78,7 @@ paths:
       security:
         - Token: []
       operationId: Создание книги
-      description: Доступно LIBRARIAN или ADMIN
+      description: Создание книги. Доступно LIBRARIAN или ADMIN
       parameters: []
       requestBody:
         content:
@@ -105,7 +105,7 @@ paths:
       security:
         - Token: []
       operationId: Получение книги
-      description: Доступно авторизованному пользователю
+      description: Получение книги по id. Доступно авторизованному пользователю
       parameters:
         - name: id
           in: path
@@ -134,7 +134,7 @@ paths:
       security:
         - Token: []
       operationId: Обновление данных о книге
-      description: Доступно LIBRARIAN или ADMIN
+      description: Обновление данных о книге c id. Доступно LIBRARIAN или ADMIN
       parameters:
         - name: id
           in: path
@@ -153,7 +153,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Book'
-          description: Книга успешно создана
+          description: Информация о книге успешно обновлена
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -168,7 +168,7 @@ paths:
       security:
         - Token: []
       operationId: Удаление книги
-      description: Доступно LIBRARIAN или ADMIN
+      description: Удаление книги с id. Доступно LIBRARIAN или ADMIN
       parameters:
         - name: id
           in: path
@@ -195,7 +195,7 @@ paths:
       security:
         - Token: []
       operationId: Список посетителей
-      description: Доступно авторизованному пользователю
+      description: Список посетителей. Доступно авторизованному пользователю
       parameters: []
       responses:
         '200':
@@ -216,7 +216,7 @@ paths:
       security:
         - Token: []
       operationId: Создание посетителя
-      description: Доступно авторизованному пользователю
+      description: Создание посетителя. Доступно авторизованному пользователю
       parameters: []
       requestBody:
         content:
@@ -243,12 +243,12 @@ paths:
       security:
         - Token: []
       operationId: Получение посетителя
-      description: Доступно авторизованному пользователю
+      description: Получение посетителя по id. Доступно авторизованному пользователю
       parameters:
         - name: id
           in: path
           required: true
-          description: Уникальный идентификатор поестителя
+          description: Уникальный идентификатор посетителя
           schema:
             type: integer
       responses:
@@ -272,7 +272,7 @@ paths:
       security:
         - Token: []
       operationId: Обновление данных о посетителе
-      description: Доступно авторизованному пользователю
+      description: Обновление данных о посетителе с id. Доступно авторизованному пользователю
       parameters:
         - name: id
           in: path
@@ -291,7 +291,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Visitor'
-          description: Посетитель успешно создан
+          description: Информация о посетителе успешно обновлена.
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -306,7 +306,7 @@ paths:
       security:
         - Token: []
       operationId: Удаление посетителя
-      description: Доступно авторизованному пользователю
+      description: Удаление посетителя с id. Доступно авторизованному пользователю
       parameters:
         - name: id
           in: path
@@ -333,7 +333,7 @@ paths:
       security:
         - Token: []
       operationId: Выдача книги
-      description: Доступно авторизованному пользователю
+      description: Выдача книги с book_id посетителю с visitor_id. Доступно авторизованному пользователю
       parameters: []
       responses:
         '201':
@@ -355,7 +355,7 @@ paths:
       security:
         - Token: []
       operationId: Возврат книги
-      description: Доступно авторизованному пользователю
+      description: Возврат книги c book_id. Доступно авторизованному пользователю
       parameters: []
       responses:
         '200':
@@ -368,12 +368,12 @@ paths:
           $ref: '#/components/responses/PermissionDenied'
       tags:
         - Действия
-  /books/{visitor_id}:
+  /visitor/{visitor_id}/books/:
     get:
       security:
         - Token: []
       operationId: Книги посетителя
-      description: Доступно авторизованному пользователю
+      description: Взятые книги посетителем с visitor_id. Доступно авторизованному пользователю
       parameters: []
       responses:
         '200':
@@ -389,7 +389,7 @@ paths:
         '403':
           $ref: '#/components/responses/PermissionDenied'
       tags:
-        - Книги
+        - Посетители
 
 
 components:
@@ -476,6 +476,14 @@ components:
         in_library:
           description: Книга находится в библиотеке
           type: boolean
+        created_at:
+          description: Дата создания
+          type: string
+          example: 2023-02-02T13:21:49.987911Z
+        created_by:
+          description: Кем создан объект
+          type: string
+          example: alex
     BookWithoutStatus:
       description: Книга в библиотеке
       type: object
@@ -542,6 +550,14 @@ components:
           description: Описание и другие заметки о посетителе
           type: string
           example: телефон 8-900-444-44-44
+        created_at:
+          description: Дата создания
+          type: string
+          example: 2023-02-02T13:21:49.987911Z
+        created_by:
+          description: Кем создан объект
+          type: string
+          example: alex
     VisitorCreateUpdate:
       description: Создание или обновление книги
       type: object
