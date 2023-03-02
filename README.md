@@ -35,5 +35,13 @@ Python >= 3.8 (```python --version```)
 >>> (venv) python manage.py createsuperuser
 >>> (venv) python manage.py runserver
 ```
-По умолчанию сервер будет доступен по адресу 
+По умолчанию сервер будет доступен по адресу
 ```127.0.0.1:8000```
+
+### Запуск клиента
+1) установить NodeJs
+2) установить angular cli командой npm install -g @angular/cli
+3) перейти в каталог frontend
+4) установить необходимые модули командой npm install
+5) запустить Angular Live Development Server командой ng serve
+6) Клиент будет доступен по адресу `localhost:4200`
