@@ -7,6 +7,7 @@ import { Visitor, VisitorService } from './visitors.service'
     styleUrls: ['./visitors.component.sass']
 })
 export class VisitorsComponent {
+    loading = false
     visitors: Visitor[] = []
 
     constructor(@Inject(VisitorService) private readonly _visitorsService: VisitorService) { }
@@ -16,9 +17,11 @@ export class VisitorsComponent {
     }
 
     getVisitors() {
-        const visitorsSubscription = this._visitorsService.visitors$.subscribe(visitors => {
-            this.visitors = visitors
+        this.loading = true
+        this._visitorsService.list().subscribe({
+            next: visitors => this.visitors = visitors,
+            error: error => console.log('error fetching visitors list:', error),
+            complete: () => this.loading = false
         })
-        visitorsSubscription.unsubscribe()
     }
 }

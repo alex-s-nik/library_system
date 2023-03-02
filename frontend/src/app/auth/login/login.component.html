@@ -1,0 +1,20 @@
+<main class="form-signin">
+    <form [formGroup]="loginForm" (submit)="login()">
+        <h1 class="h3 mb-3 fw-normal">Вход</h1>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" formControlName="username">
+            <label for="floatingInput">Логин</label>
+            <div *ngIf="loginForm.invalid && usernameControl?.touched && usernameControl.errors">
+                <span *ngIf="usernameControl.errors['required']">Логин не может быть пустым</span>
+            </div>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" formControlName="password">
+            <label for="floatingPassword">Пароль</label>
+            <div *ngIf="loginForm.invalid && passwordControl?.touched && passwordControl.errors">
+                <span *ngIf="passwordControl.errors['minlength']">Пароль не может быть пустым</span>
+            </div>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="this.loginForm.invalid">Войти</button>
+    </form>
+</main>

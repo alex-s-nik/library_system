@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Добавить нового посетителя</h4>
+    </div>
+    <form [formGroup]="newVisitorForm" (submit)="create()">
+        <div class="card-body">
+            <label for="newVisitorNameInput">Имя</label>
+            <input id="newVisitorNameInput" formControlName="name" type="text" class="form-control">
+            <label for="newVisitorInfoInput">Информация</label>
+            <input id="newVisitorInfoInput" formControlName="info"
+                class="form-control">
+        </div>
+        <div class="card-footer">
+            <button [routerLink]="'/visitors'" class="btn btn-secondary">Назад</button>
+            <button [disabled]="newVisitorForm.disabled || newVisitorForm.invalid" type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+</div>

@@ -1,24 +1,31 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
-import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { VisitorsComponent } from './visitors/visitors.component'
-import { BooksComponent } from './books/books.component'
-import { VisitorCardComponent } from './visitors/visitor-card/visitor-card.component'
+import { AppRoutingModule } from './app-routing.module'
+import { AuthInterceptor } from './auth/auth-interceptor'
+import { AuthModule } from './auth/auth.module'
+import { AuthService } from './auth/auth.service'
+import { BooksModule } from './books/books.module'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { VisitorsModule } from './visitors/visitors.module'
 
 @NgModule({
     declarations: [
         AppComponent,
-        VisitorsComponent,
-        BooksComponent,
-        VisitorCardComponent
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule
+        HttpClientModule,
+        AppRoutingModule,
+        AuthModule,
+        BooksModule,
+        VisitorsModule,
     ],
-    providers: [],
+    providers: [
+        AuthService,
+        [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

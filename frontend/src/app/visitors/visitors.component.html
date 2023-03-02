@@ -1,8 +1,8 @@
 <div class="actions">
-    <a href="#" class="btn btn-outline-primary">Добавить посетителя</a>
+    <a [routerLink]="['/visitors/add' ]" class="btn btn-outline-primary">Добавить посетителя</a>
 </div>
 
-<div class="card shadow">
+<div *ngIf="!loading" class="card shadow">
     <div class="card-body">
         <table class="visitors-list table table-hover book-list-main">
             <thead>

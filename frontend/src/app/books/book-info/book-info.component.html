@@ -1,0 +1,11 @@
+<div *ngIf="!loading && book" class="card">
+    <div class="card-header">
+        <h4>{{ book.title }}</h4>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ book.description }}</p>
+    </div>
+    <div class="card-footer">
+        <button [routerLink]="'/books'" class="btn btn-primary">Назад</button>
+    </div>
+</div>

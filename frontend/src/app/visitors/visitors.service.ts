@@ -1,53 +1,31 @@
-import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-import { Book, BOOKS } from '../books/books.component'
+import { HttpClient } from '@angular/common/http'
+import { Inject, Injectable } from '@angular/core'
+import { Book } from '../books/books.service'
 
-const VISITORS: Visitor[] = [
-    { id: 1, name: 'Иванов Иван Иванович', info: 'телефон 8-900-444-44-44' },
-    { id: 2, name: 'Петров Пётр Петрович', info: 'нет телефона' },
-    { id: 3, name: 'Тарик Рашид Николаевич', info: 'Нейросеть' },
-]
-
-const RENT: Rent[] = [
-    { visitorId: 1, bookId: 1 },
-    { visitorId: 1, bookId: 2 },
-    { visitorId: 1, bookId: 4 }, // несуществующая книга
-    { visitorId: 2, bookId: 2 },
-    { visitorId: 2, bookId: 3 },
-    { visitorId: 3, bookId: 1 },
-    { visitorId: 3, bookId: 3 },
-]
+const VISITORS_URL = 'api/v1/visitors'
 
 @Injectable({
     providedIn: 'root'
 })
 export class VisitorService {
-    visitors$ = new Observable<Visitor[]>(observer => {
-        observer.next(VISITORS)
-        observer.complete()
-    });
+    constructor(
+        @Inject(HttpClient) private readonly _http: HttpClient
+    ) { }
 
-    constructor() { }
-
-    getVisitor(id: Visitor['id'], rent: boolean = false) {
-        return new Observable<Visitor | undefined>(observer => {
-            const visitor = VISITORS.find(visitor => visitor.id === id)
-            if (visitor && rent) {
-                const visitorBooks = RENT.filter(rent => rent.visitorId === id)
-                    .map(rent => BOOKS.find(book => book.id === rent.bookId))
-                    .filter(book => book !== undefined) as Book[]
-                visitor.books = visitorBooks
-            }
-            observer.next(visitor)
-            observer.complete()
-        })
+    list() {
+        return this._http.get<Visitor[]>(VISITORS_URL)
     }
 
-    getRent(visitorId: Visitor['id']) {
-        return new Observable<Rent | undefined>(observer => {
-            observer.next(RENT.find(rent => rent.visitorId === visitorId))
-            observer.complete()
-        })
+    get(id: Visitor['id']) {
+        return this._http.get<Visitor>(`${VISITORS_URL}/${id}`)
+    }
+
+    create(book: VisitorCreateDto) {
+        return this._http.post(VISITORS_URL + '/', book)
+    }
+
+    books(id: Visitor['id']) {
+        return this._http.get<VisitorBooks>(VISITORS_URL + `/${id}/books`)
     }
 }
 
@@ -61,4 +39,14 @@ export type Visitor = {
     name: string
     info: string
     books?: Book[]
+}
+
+export type VisitorCreateDto = {
+    name: string,
+    info: string
+}
+
+export type VisitorBooks = {
+    visitor: Visitor,
+    books: Book[]
 }

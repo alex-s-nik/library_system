@@ -1,0 +1,49 @@
+<div *ngIf="!visitor">Посетитель не найден</div>
+<div *ngIf="visitor" class="card shadow">
+    <div class="card-header">{{ visitor.name }}</div>
+    <div class="card-body row">
+        <div class="col-6">
+            <label for="visitor-info">Заметка о посетителе</label>
+            <br>
+            <textarea id="visitor-info" class="form-control" cols="20" rows="5">{{ visitor.info }}</textarea>
+        </div>
+        <div class="col-6">
+            <div>
+                <label for="rentBookSelect">Выдать книгу</label>
+                <br>
+                <div class="input-group">
+                    <select id="rentBookSelect" class="form-select" [(ngModel)]="selectedBookId">
+                        <option *ngFor="let book of availableBooks" [value]="book.id">{{book.title}}</option>
+                    </select>
+                    <button class="btn btn-outline-primary" (click)="rentBookHandler()">Выдать</button>
+                </div>
+            </div>
+            <br>
+            <div>
+                <label for="">Книги на руках</label>
+                <p *ngIf="!visitorbooks?.books?.length" class="no-rented-books">Нет книг</p>
+                <ol *ngIf="visitorbooks?.books?.length">
+                    <li *ngFor="let book of visitorbooks?.books">
+                        <div class="rented-books-list">
+                            <div>{{ book.title }}</div>
+                            <div>
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-outline-secondary" title="Продлить">
+                                        <i class="bi bi-arrow-up"></i>
+                                    </button>
+                                    <button (click)="returnBookHandler(book.id)" type="button"
+                                        class="btn btn-outline-secondary" title="Сдать">
+                                        <i class="bi bi-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button [routerLink]="'/visitors'" class="btn btn-primary">Назад</button>
+    </div>
+</div>
