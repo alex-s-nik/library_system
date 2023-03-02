@@ -1,0 +1,24 @@
+<div class="actions">
+    <div class="card">
+        <div class="card-body">
+            <a [routerLink]="'/books/add'" class="btn btn-outline-primary">Добавить книгу</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover book-list-main">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Аннотация</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of books" (click)="navigateToBookHandler(book.id)">
+            <th scope="row">{{ book.id }}</th>
+            <td>{{ book.title }}</td>
+            <td>{{ book.description }}</td>
+        </tr>
+    </tbody>
+</table>

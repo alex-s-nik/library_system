@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Добавить новую книгу</h4>
+    </div>
+    <form [formGroup]="newBookForm" (submit)="create()">
+        <div class="card-body">
+            <label for="newBookTitleInput">Название</label>
+            <input id="newBookTitleInput" formControlName="title" type="text" class="form-control">
+            <label for="newBookDescriptionInput">Описание</label>
+            <textarea id="newBookDescriptionInput" formControlName="description"
+                class="form-control"></textarea>
+        </div>
+        <div class="card-footer">
+            <button [routerLink]="'/books'" class="btn btn-secondary">Назад</button>
+            <button [disabled]="newBookForm.disabled || newBookForm.invalid" type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+</div>
