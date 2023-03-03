@@ -8,9 +8,11 @@ import { VisitorsComponent } from './visitors/visitors.component'
 import { BookInfoComponent } from './books/book-info/book-info.component'
 import { BookFormComponent } from './books/book-form/book-form.component'
 import { VisitorFormComponent } from './visitors/visitor-form/visitor-form.component'
+import { LogoutComponent } from './auth/logout/logout.component'
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
+    { path: 'logout', component: LogoutComponent },
     { path: 'books', component: BooksComponent, canActivate: [AuthGuard] },
     { path: 'books/add', component: BookFormComponent, canActivate: [AuthGuard] },
     { path: 'books/:id', component: BookInfoComponent, canActivate: [AuthGuard] },
