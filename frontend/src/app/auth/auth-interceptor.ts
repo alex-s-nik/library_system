@@ -22,6 +22,11 @@ export class AuthInterceptor implements HttpInterceptor {
             headers: req.headers.set('Authorization', 'Token ' + authToken)
         })
 
+        // Не добавляем заголовок с токеном при запросе получения токена
+        if (req.url.includes('api/v1/auth/token/login')) {
+            return next.handle(req)
+        }
+
         // send cloned request with header to the next handler.
         return next.handle(authReq).pipe(tap({
             error: (error) => {
