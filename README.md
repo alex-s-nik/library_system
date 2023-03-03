@@ -45,3 +45,10 @@ Python >= 3.8 (```python --version```)
 4) установить необходимые модули командой npm install
 5) запустить Angular Live Development Server командой ng serve
 6) Клиент будет доступен по адресу `localhost:4200`
+
+### Запуск клиента через docker
+```
+>>> cd frontend
+>>> docker build -t front .
+>>> docker run -d -p 4200:4200 front
+```
