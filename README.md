@@ -38,6 +38,13 @@ Python >= 3.8 (```python --version```)
 По умолчанию сервер будет доступен по адресу
 ```127.0.0.1:8000```
 
+### Запуск сервера через docker
+```
+>>> cd backend
+>>> docker build -t back .
+>>> docker run -d -p 8000:8000 -v "/$(pwd)/mylibrary/db.sqlite3":/app/mylibrary/db.sqlite3 back
+```
+
 ### Запуск клиента
 1) установить NodeJs
 2) установить angular cli командой npm install -g @angular/cli
