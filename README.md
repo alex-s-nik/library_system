@@ -43,6 +43,9 @@ Python >= 3.8 (```python --version```)
 >>> cd backend
 >>> docker build -t back .
 >>> docker run -d -p 8000:8000 -v "/$(pwd)/mylibrary/db.sqlite3":/app/mylibrary/db.sqlite3 back
+>>> docker exec -it back /bin/bash
+>>> # cd mylibrary
+>>> # python manage.py migrate
 ```
 
 ### Запуск клиента
