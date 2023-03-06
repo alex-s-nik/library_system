@@ -115,18 +115,11 @@ class VisitorViewSet(CreatedByMixin, viewsets.ModelViewSet):
 
     @action(detail=True, methods=["get"], permission_classes=(IsAuthenticated,))
     def books(self, request, pk=None):
-        history_with_last_taken_books = History.objects.filter(
-            created_at=Subquery(
-                History.objects.filter(book=OuterRef("book"))
-                .values("book")
-                .annotate(max_date=Max("created_at"))
-                .values("max_date")[:1]
-            )
-        ).filter(action_type=ActionType.TAKE)
-
-        books_taken_by_visitor = Book.objects.filter(
-            id__in=history_with_last_taken_books.filter(visitor=pk).values("book")
-        ).annotate(taken_at=F("history__created_at"))
+        visitor = get_object_or_404(Visitor, id=pk)
+        books_taken_by_visitor = Book.objects.raw(
+            'SELECT max(lh.created_at) as "taken_at", lb.id from library_history lh inner join library_book lb on lh.book_id = lb.id where lh.visitor_id = %s GROUP BY book_id HAVING action_type = %s',
+            [visitor.id, ActionType.TAKE]
+        )
         return Response(
             VisitorDebtSerializer(
                 {"visitor": Visitor.objects.get(id=pk), "books": books_taken_by_visitor}
