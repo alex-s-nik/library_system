@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Book, History, Visitor
+from .models import Action, Book, Visitor
 
 
 class BaseAdmin(admin.ModelAdmin):
@@ -26,14 +26,10 @@ class VisitorAdmin(BaseAdmin):
     ) + BaseAdmin.fields
 
 
-class HistoryAdmin(BaseAdmin):
-    fields = (
-        "visitor",
-        "book",
-        "action_type",
-    ) + BaseAdmin.fields
+class ActionAdmin(BaseAdmin):
+    fields = '__all__'
 
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Visitor, VisitorAdmin)
-admin.site.register(History, HistoryAdmin)
+admin.site.register(Action, ActionAdmin)
