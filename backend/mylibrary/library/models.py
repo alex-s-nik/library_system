@@ -116,6 +116,8 @@ class Action(models.Model):
             f'take book '
             f'{self.book} '
             f'at {self.taken_date.strftime("%H:%M %Y-%m-%d")}'
+            ' and returned at'
+            f'{self.return_date.strftime("%H:%M %Y-%m-%d") if self.return_date else "ever yet"}'
         )
 
     class Meta:

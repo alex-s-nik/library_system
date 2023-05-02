@@ -5,15 +5,15 @@ from library.models import Book, Visitor
 
 
 @pytest.fixture
-def three_books(first_user):
-    return mixer.cycle(3).blend(
+def book1(first_user):
+    return mixer.blend(
         Book,
         created_by=first_user
     )
 
 @pytest.fixture
-def three_visitors(first_user):
-    return mixer.cycle(3).blend(
+def visitor1(first_user):
+    return mixer.blend(
         Visitor,
         created_by=first_user
     )
