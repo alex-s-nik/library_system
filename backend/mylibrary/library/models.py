@@ -98,6 +98,7 @@ class Action(models.Model):
         to=User,
         on_delete=models.DO_NOTHING,
         related_name='returned_actions',
+        null=True,
     )
 
     def __str__(self):
