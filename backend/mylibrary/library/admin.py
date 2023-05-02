@@ -26,10 +26,10 @@ class VisitorAdmin(BaseAdmin):
     ) + BaseAdmin.fields
 
 
-class ActionAdmin(BaseAdmin):
-    fields = '__all__'
+class ActionAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Visitor, VisitorAdmin)
-admin.site.register(Action, ActionAdmin)
+#admin.site.register(Action, ActionAdmin)

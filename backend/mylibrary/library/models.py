@@ -101,6 +101,15 @@ class Action(models.Model):
         null=True,
     )
 
+    def save(self, *args, **kwargs):
+        book = self.book
+        # если поле даты возврата пусто - значит книгу выдают
+        # иначе - книгу возвращают
+        book.in_library = bool(self.return_date)
+        book.save()
+        super().save(*args, **kwargs)
+        
+
     def __str__(self):
         return (
             f'{self.visitor} '

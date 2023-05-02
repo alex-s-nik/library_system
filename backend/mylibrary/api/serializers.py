@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from library.models import Book, History, Visitor
+from library.models import Book, Visitor
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class VisitorSerializer(serializers.ModelSerializer):
         fields = ("id", "name", "info", "created_at", "created_by")
 
 
-class HistorySerializer(serializers.ModelSerializer):
+'''class HistorySerializer(serializers.ModelSerializer):
     book = BookSerializer()
     visitor = VisitorSerializer()
     created_by = serializers.SlugRelatedField(read_only=True, slug_field="username")
@@ -35,7 +35,7 @@ class HistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = History
         fields = ("id", "visitor", "book", "action_type", "created_at", "created_by")
-
+'''
 
 class BookWithActionDateSerializer(serializers.ModelSerializer):
     created_by = serializers.SlugRelatedField(read_only=True, slug_field="username")
