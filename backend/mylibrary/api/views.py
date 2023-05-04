@@ -13,10 +13,13 @@ from rest_framework.response import Response
 from api.permissions import IsLibrarianAndAbove
 from api.serializers import (
     BookSerializer,
+    ReturnBookActionSerializer,
+    TakenBookActionSerializer,
     VisitorSerializer,
     VisitorDebtSerializer,
 )
 from library.models import Action, Book, Visitor
+from library.services import return_book_to_library, take_book_to_visitor
 
 
 class CreatedByMixin:
@@ -39,20 +42,34 @@ class BookViewSet(CreatedByMixin, viewsets.ModelViewSet):
         book = get_object_or_404(Book, id=pk)
         visitor = get_object_or_404(Visitor, id=visitor_id)
 
-        try:
-            action = Action(
-                book=book,
-                visitor=visitor,
-                taken_by=request.user
-            )
-            return Response(
-                #serializer.data,
-                status=status.HTTP_201_CREATED
-            )
-        # TODO: change exception type
-        except Exception as e:
-            raise DRFValidationError(*e)
+        action = take_book_to_visitor(
+            book=book,
+            visitor=visitor,
+            executor=request.user
+        )
 
+        return Response(
+            TakenBookActionSerializer(action).data,
+            status=status.HTTP_201_CREATED
+        )
+
+    @action(
+        detail=True,
+        methods=('post',),
+        permission_classes=(IsAuthenticated,)
+    )
+    def was_returned(self, request, pk=None):
+        book = get_object_or_404(Book, id=pk)
+
+        action = return_book_to_library(
+            book=book,
+            executor=request.user
+        )
+
+        return Response(
+            ReturnBookActionSerializer(action).data,
+            status=status.HTTP_201_CREATED
+        )
 '''
     @action(
             detail=True,
