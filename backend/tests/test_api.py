@@ -171,7 +171,10 @@ class TestAPIMainModels:
 
         # изменение существующего посетителя
         visitor = Visitor.objects.first()
-        invalid_data = {}
+        invalid_data = {
+            'name': '',
+            'info': ''
+        }
 
         response = first_user_client.patch(
             f'/api/v1/visitors/{visitor.id}/',
@@ -275,14 +278,14 @@ class TestAPIMainModels:
             'В результате анонимного delete-запроса изменилось количество записей в БД'
         )
         
-    def test_book_with_user(self, first_user_client):
+    def test_book_with_user(self, first_user_client, librarian_user_client):
         book_title = 'test_title'
         book_description = 'test_description'
 
         # создание книги
         book_count_before_requset = Book.objects.count()
 
-        response = first_user_client.post(
+        response = librarian_user_client.post(
             '/api/v1/books/',
             data={
                 'title': book_title,
@@ -330,7 +333,7 @@ class TestAPIMainModels:
         assert 'title' in test_book, (
             'Проверьте, что добавили `title` в список полей `fields` сериализатора модели Book'
         )
-        assert 'info' in test_book, (
+        assert 'description' in test_book, (
             'Проверьте, что добавили `description` в список полей `fields` сериализатора модели Book'
         )
 
@@ -366,9 +369,12 @@ class TestAPIMainModels:
 
         # изменение существующего посетителя
         book = Book.objects.first()
-        invalid_data = {}
+        invalid_data = {
+            'title': '',
+            'description': ''
+        }
 
-        response = first_user_client.patch(
+        response = librarian_user_client.patch(
             f'/api/v1/books/{book.id}/',
             data=invalid_data
         )
@@ -384,7 +390,7 @@ class TestAPIMainModels:
             'description': test_description
         }
 
-        response = first_user_client.patch(
+        response = librarian_user_client.patch(
             f'/api/v1/books/{book.id}/',
             data=valid_data
         )
