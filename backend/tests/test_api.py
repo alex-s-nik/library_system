@@ -1,7 +1,7 @@
 import pytest
 from rest_framework import status
 
-from library.models import Book, Visitor
+from library.models import Action, Book, Visitor
 
 class TestAPIMainModels:
     @pytest.mark.django_db(transaction=True)
@@ -402,8 +402,79 @@ class TestAPIMainModels:
         # TODO: удаление будет реализовано позже
 
 class TestAPIActions:
-    def test_taking_book(self):
-        pass
+    def test_taking_book(self, first_user_client, first_user, book1, visitor1):
+        actions_in_db_before_take = Action.objects.count()
+
+        response = first_user_client.post(
+            f'/api/v1/books/{book1.id}/taken_by/{visitor1.id}/',
+            {
+                'book': book1,
+                'visitor': visitor1
+            }
+        )
+
+        assert response.status_code == status.HTTP_201_CREATED, (
+            'Статус код при выдаче существующей книги существующему'
+            'посетителю отличается от требуемого'
+        )
+
+        actions_in_db_after_take = Action.objects.count()
+
+        assert actions_in_db_before_take + 1 == actions_in_db_after_take, (
+            'Информация о выдаче книги не была добавлена в БД'
+        )
+
+        taken_book = Book.objects.get(id=book1.id)
+
+        assert taken_book.in_library == False, (
+            'Статус книги после выдачи не сменился'
+        )
+
+        last_action = Action.objects.last()
+    
+        assert last_action.book == book1, (
+            'В записи о выдаче книги не содержится информации о том,'
+            'какая книга была выдана'
+        )
+
+        assert last_action.visitor == visitor1, (
+            'В записи о выдаче книги не содержится информации о том,'
+            'кому была выдана книга'
+        )
+
+        assert last_action.taken_by == first_user, (
+            'В записи о выдаче книги содержится неверная информация'
+            'о том, кто выдал эту книгу'
+        )
+
+        assert last_action.return_date is None, (
+            'В записи о выдаче книги содержится информация о времени возврата'
+        )
+
+        assert last_action.returned_by is None, (
+            'В записи о выдаче книги содержится информация о том, кто'
+            'вернул эту книгу'
+        )
+
+        # попробуем взять эту книгу еще раз
+        actions_in_db_before_take = Action.objects.count()
+
+        response = first_user_client.post(
+            f'/api/v1/books/{book1.id}/taken_by/{visitor1.id}/',
+            {
+                'book': book1,
+                'visitor': visitor1
+            }
+        )
+
+        assert response.status_code == status.HTTP_400_BAD_REQUEST, (
+            'Неверный статус ответа при повторном взятии уже выданной книги'
+        )
+        actions_in_db_after_take = Action.objects.count()
+
+        assert actions_in_db_before_take == actions_in_db_after_take, (
+            'При повторном взятии уже выданной книги появились новые записи в БД'
+        )
 
     def test_returning_book(self):
         pass
