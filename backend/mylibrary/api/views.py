@@ -13,11 +13,13 @@ from rest_framework.response import Response
 from api.permissions import IsLibrarianAndAbove
 from api.serializers import (
     BookSerializer,
-    HistorySerializer,
+    ReturnBookActionSerializer,
+    TakenBookActionSerializer,
     VisitorSerializer,
     VisitorDebtSerializer,
 )
-from library.models import ActionType, Book, History, Visitor
+from library.models import Action, Book, Visitor
+from library.services import return_book_to_library, take_book_to_visitor
 
 
 class CreatedByMixin:
@@ -34,28 +36,49 @@ class BookViewSet(CreatedByMixin, viewsets.ModelViewSet):
         detail=True,
         methods=["post"],
         permission_classes=(IsAuthenticated,),
-        serializer_class=HistorySerializer,
         url_path="taken_by/(?P<visitor_id>[^/.]+)",
     )
     def taken_by(self, request, visitor_id, pk=None):
         book = get_object_or_404(Book, id=pk)
         visitor = get_object_or_404(Visitor, id=visitor_id)
-        try:
-            history = History.objects.create(
-                visitor=visitor,
-                book=book,
-                action_type=ActionType.TAKE,
-                created_by=request.user,
-            )
-            return Response(
-                HistorySerializer(history).data, status=status.HTTP_201_CREATED
-            )
-        except DjangoValidationError as e:
-            raise DRFValidationError(*e)
 
-    @action(detail=True, methods=["post"], permission_classes=(IsAuthenticated,))
+        action = take_book_to_visitor(
+            book=book,
+            visitor=visitor,
+            executor=request.user
+        )
+
+        return Response(
+            TakenBookActionSerializer(action).data,
+            status=status.HTTP_201_CREATED
+        )
+
+    @action(
+        detail=True,
+        methods=('post',),
+        permission_classes=(IsAuthenticated,)
+    )
     def was_returned(self, request, pk=None):
         book = get_object_or_404(Book, id=pk)
+
+        action = return_book_to_library(
+            book=book,
+            executor=request.user
+        )
+
+        return Response(
+            ReturnBookActionSerializer(action).data,
+            status=status.HTTP_201_CREATED
+        )
+'''
+    @action(
+            detail=True,
+            methods=["post"],
+            permission_classes=(IsAuthenticated,)
+    )
+    def was_returned(self, request, pk=None):
+        book = get_object_or_404(Book, id=pk)
+
         # find the book in history which has status 'take' and has the latest date of taken
         # select h.*
         # from (
@@ -106,13 +129,13 @@ class BookViewSet(CreatedByMixin, viewsets.ModelViewSet):
         return Response(
             HistorySerializer(history_obj).data, status=status.HTTP_201_CREATED
         )
-
+'''
 
 class VisitorViewSet(CreatedByMixin, viewsets.ModelViewSet):
     queryset = Visitor.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = VisitorSerializer
-
+'''
     @action(detail=True, methods=["get"], permission_classes=(IsAuthenticated,))
     def books(self, request, pk=None):
         history_with_last_taken_books = History.objects.filter(
@@ -133,3 +156,4 @@ class VisitorViewSet(CreatedByMixin, viewsets.ModelViewSet):
             ).data,
             status=status.HTTP_200_OK,
         )
+'''
