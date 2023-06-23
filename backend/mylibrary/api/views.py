@@ -2,6 +2,7 @@ from django.core.exceptions import (
     ValidationError as DjangoValidationError,
     ObjectDoesNotExist,
 )
+from django.db import IntegrityError
 from django.db.models import F, Max, OuterRef, Subquery
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
@@ -42,11 +43,17 @@ class BookViewSet(CreatedByMixin, viewsets.ModelViewSet):
         book = get_object_or_404(Book, id=pk)
         visitor = get_object_or_404(Visitor, id=visitor_id)
 
-        action = take_book_to_visitor(
-            book=book,
-            visitor=visitor,
-            executor=request.user
-        )
+        try:
+            action = take_book_to_visitor(
+                book=book,
+                visitor=visitor,
+                executor=request.user
+            )
+        except IntegrityError as e:
+            return Response(
+                data=str(e),
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         return Response(
             TakenBookActionSerializer(action).data,
