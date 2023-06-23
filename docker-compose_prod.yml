@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  db:
+    image: postgres:13.0-alpine
+    # volume
+  backend:
+    build: ./backend/Dockerfile
+    restart: always
+    # volume
+    depends_on:
+      - db
+  frontend:
+    build: ./frontend/Dockerfile
+    # volume
+  nginx:
+    image: nginx:1.25.1
+    # volume
+    # env_file
+    ports:
+      - "${APP_PUBLIC_PORT:-80}:80"
+    depends_on:
+      - backend
