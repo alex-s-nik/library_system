@@ -2,21 +2,26 @@ version: '3.3'
 services:
   db:
     image: postgres:13.0-alpine
-    # volume
+    env_file:
+      - ./.env
+    volumes:
+      - "./data:/var/lib/postgresql/data/"
   backend:
-    build: ./backend/Dockerfile
-    restart: always
-    # volume
-    depends_on:
-      - db
-  frontend:
-    build: ./frontend/Dockerfile
-    # volume
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./.env
   nginx:
-    image: nginx:1.25.1
-    # volume
-    # env_file
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
     ports:
-      - "${APP_PUBLIC_PORT:-80}:80"
+      - "80:80"
+    env_file:
+      - ./.env
+    volumes:
+      - "./dockerize/nginx.conf:/etc/nginx/conf.d/default.conf"
     depends_on:
       - backend
+      - db

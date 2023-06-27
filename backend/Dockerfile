@@ -1,7 +1,6 @@
-FROM python:3.9-alpine
-EXPOSE 8000
+FROM python:3.11-alpine
 WORKDIR /app
-COPY requirements.txt /app
+COPY requirements.txt .
 RUN pip install -r requirements.txt
-COPY . .
-CMD ["python", "mylibrary/manage.py", "runserver", "0.0.0.0:8000"]
+COPY ./mylibrary .
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "mylibrary.wsgi"]

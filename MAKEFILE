@@ -1,0 +1,11 @@
+startfrontend:
+	docker compose -f docker-compose_back_dev.yml up -d
+
+startbackend:
+	docker compose -f docker-compose_front_dev.yml up -d
+
+migrate:
+	docker compose run backend python manage.py migrate
+
+production:
+	docker compose -f docker-compose_prod.yml up -d

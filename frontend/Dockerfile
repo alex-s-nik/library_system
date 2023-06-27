@@ -1,11 +1,11 @@
-FROM node:19-alpine
-EXPOSE 4200
+FROM node:20-alpine AS build
 WORKDIR /app
 
-RUN npm install -g @angular/cli
-
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install
-COPY . .
+COPY . ./
+RUN npm run build
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--proxy-config", "proxy-docker.conf.json"]
+
+FROM nginx:1.25.1
+COPY --from=build /app/dist/frontend /usr/share/nginx/html
