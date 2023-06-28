@@ -1,11 +1,8 @@
-startfrontend:
-	docker compose -f docker-compose_back_dev.yml up -d
-
-startbackend:
-	docker compose -f docker-compose_front_dev.yml up -d
+add_superuser:
+	docker compose -f docker-compose_prod.yml run --rm backend python manage.py add_superuser
 
 migrate:
-	docker compose run backend python manage.py migrate
+	docker compose -f docker-compose_prod.yml run --rm backend python manage.py migrate
 
 production:
 	docker compose -f docker-compose_prod.yml up -d
