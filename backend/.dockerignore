@@ -1,0 +1,6 @@
+**/venv
+**/tests
+.gitignore
+setup.cfg
+Dockerfile
+**/db.sqlite3

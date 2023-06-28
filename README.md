@@ -18,30 +18,11 @@
 
 - Главный пользователь/администратор - может то же, что и Библиотекарь, плюс имеет доступ к админке, где также может управлять пользователями.
 
-### Запуск сервера
-Python >= 3.8 (```python --version```)
 
-Для Windows-систем
+### Запуск проекта production
+
+Пример заполнения ENV-файла находится в файле example.env
 
 ```
->>> cd backend
->>> python -m venv venv
->>> cd venv/scripts/
->>> activate.bat
->>> (venv) cd ../..
->>> (venv) pip install -r requirements.txt
->>> (venv) cd mylibrary
->>> (venv) python manage.py migrate
->>> (venv) python manage.py createsuperuser
->>> (venv) python manage.py runserver
+>>> make production
 ```
-По умолчанию сервер будет доступен по адресу
-```127.0.0.1:8000```
-
-### Запуск клиента
-1) установить NodeJs
-2) установить angular cli командой npm install -g @angular/cli
-3) перейти в каталог frontend
-4) установить необходимые модули командой npm install
-5) запустить Angular Live Development Server командой ng serve
-6) Клиент будет доступен по адресу `localhost:4200`
