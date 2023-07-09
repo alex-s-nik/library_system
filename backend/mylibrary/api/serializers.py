@@ -47,6 +47,7 @@ class BookWithActionDateSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ("in_library", "created_by", "taken_at")
 
+
 class ActionSerializer(serializers.ModelSerializer):
     visitor = VisitorSerializer(read_only=True)
     books = BookSerializer(read_only=True)
@@ -56,7 +57,7 @@ class ActionSerializer(serializers.ModelSerializer):
 
     def get_action(self, obj):
         raise NotImplementedError('Action is unknown')
-    
+
     def get_datetime(self, obj):
         raise NotImplementedError
 
@@ -83,6 +84,7 @@ class TakenBookActionSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('taken_by', 'datetime')
 
+
 class ReturnBookActionSerializer(serializers.ModelSerializer):
     visitor = VisitorSerializer(read_only=True)
     book = BookSerializer(read_only=True)
@@ -103,6 +105,7 @@ class ReturnBookActionSerializer(serializers.ModelSerializer):
             'action'
         )
         read_only_fields = ('return_by', 'datetime')
+
 
 class VisitorDebtSerializer(serializers.Serializer):
     visitor = VisitorSerializer(read_only=True)

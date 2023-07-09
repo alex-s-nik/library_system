@@ -2,7 +2,7 @@ import json
 import random
 
 from django.contrib.auth import get_user_model
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from library.models import Book, Visitor
@@ -30,7 +30,7 @@ class Command(BaseCommand):
             visitor_data['created_by'] = random.choice(users)
             visitor = Visitor(**visitor_data)
             visitors.append(visitor)
-        
+
         # add data about books
         json_books_file = 'fake_data/books.json'
         with open(json_books_file) as f:
