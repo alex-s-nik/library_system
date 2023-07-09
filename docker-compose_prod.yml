@@ -12,6 +12,8 @@ services:
       dockerfile: ./Dockerfile
     env_file:
       - ./.env
+    volumes:
+      - "./fake_data:/app/fake_data"
   nginx:
     build:
       context: ./frontend
