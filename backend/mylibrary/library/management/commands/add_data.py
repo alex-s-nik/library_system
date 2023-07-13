@@ -37,7 +37,7 @@ class Command(BaseCommand):
             books_data = json.load(f)
         books = []
         for book_data in books_data:
-            books_data['created_by'] = random.choice(users)
+            book_data['created_by'] = random.choice(users)
             book = Book(**book_data)
             books.append(book)
 
