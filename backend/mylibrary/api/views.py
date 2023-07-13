@@ -10,10 +10,11 @@ from api.serializers import (
     BookSerializer,
     ReturnBookActionSerializer,
     TakenBookActionSerializer,
+    VisitorDebtSerializer,
     VisitorSerializer,
 )
-from library.models import Book, Visitor
-from library.services import return_book_to_library, take_book_to_visitor
+from library.models import Action, Book, Visitor
+from library.services import get_all_book_given_to_visitor_now, return_book_to_library, take_book_to_visitor
 
 
 class CreatedByMixin:
@@ -76,3 +77,17 @@ class VisitorViewSet(CreatedByMixin, viewsets.ModelViewSet):
     queryset = Visitor.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = VisitorSerializer
+
+    @action(
+            detail=True,
+            methods=('get',)
+    )
+    def books(self, request, pk=None):
+        visitor = get_object_or_404(Visitor, id=pk)
+        books = get_all_book_given_to_visitor_now(visitor=visitor)
+        return Response(
+            VisitorDebtSerializer(
+                {"visitor": Visitor.objects.get(id=pk), "books": books}
+            ).data,
+            status=status.HTTP_200_OK,
+        )
