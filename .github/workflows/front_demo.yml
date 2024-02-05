@@ -17,4 +17,4 @@ jobs:
             key: ${{ secrets.FRONT_DEMO_SSH_KEY }}
             port: ${{ secrets.FRONT_DEMO_SSH_PORT }}
             source: "front_demo/"
-            target: "/var/www/lib_front/"
+            target: "/var/www/"
