@@ -12,9 +12,9 @@ jobs:
         - name: copy file via ssh password
           uses: appleboy/scp-action@v0.1.7
           with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            password: ${{ secrets.PASSWORD }}
-            port: ${{ secrets.PORT }}
+            host: ${{ secrets.FRONT_DEMO_SSH_HOST }}
+            username: ${{ secrets.FRONT_DEMO_SSH_USERNAME }}
+            key: ${{ secrets.FRONT_DEMO_SSH_KEY }}
+            port: ${{ secrets.FRONT_DEMO_SSH_PORT }}
             source: "/front_demo/*"
             target: "/var/www/lib_front/"
