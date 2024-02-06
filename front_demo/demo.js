@@ -1,3 +1,5 @@
+readers = library_data["readers"]
+
 
 findReaderInput = document.getElementById("find-reader_input")
 resultsBlock = document.getElementById("find_reader_result")
