@@ -101,3 +101,35 @@
     display: flex;
     flex-direction: column;
 }
+
+.reader_lending__content_wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.reader_lending__lending {
+    background-color: blueviolet;
+    width: 50%;
+
+}
+
+.reader_lending__reader-info {
+    /*background-color: brown;*/
+    width: 50%;
+    padding: 15px;
+
+}
+
+.reader_lending__reader-info__name {
+    text-align: right;
+    font-size: large;
+    font-weight: 800;
+    border-bottom: 3px solid black;
+    margin: 0 10px;
+}
+
+.reader_lending__reader-info__info {
+    padding-top: 20px;
+    text-align: right;
+}
