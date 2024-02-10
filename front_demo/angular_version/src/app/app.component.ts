@@ -5,6 +5,7 @@ import { AcquisitionComponent } from './pages/acquisition/acquisition.component'
 import { LendingComponent } from './pages/lending/lending.component';
 import { MainComponent  } from './pages/main/main.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { ReaderComponent } from './pages/lending/reader/reader.component';
 
 import { MenuComponent } from './pages/_shared/menu/menu.component';
 
@@ -19,7 +20,8 @@ import { MenuComponent } from './pages/_shared/menu/menu.component';
     LendingComponent,
     MainComponent,
     MenuComponent,
-    ReportsComponent
+    ReportsComponent,
+    ReaderComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'

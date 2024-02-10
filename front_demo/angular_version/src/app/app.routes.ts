@@ -4,6 +4,8 @@ import { AcquisitionComponent } from './pages/acquisition/acquisition.component'
 import { LendingComponent } from './pages/lending/lending.component';
 import { MainComponent } from './pages/main/main.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { ReaderComponent } from './pages/lending/reader/reader.component';
+import { WrapperComponent } from './pages/lending/wrapper/wrapper.component';
 
 export const routes: Routes = [
     {
@@ -18,8 +20,20 @@ export const routes: Routes = [
     },
     {
         path: 'lending',
+        title: 'Книговыдача',
         component: LendingComponent,
-        title: 'Книговыдача'
+        children: [
+            {
+                path: '',
+                title: 'Книговыдача',
+                component: WrapperComponent
+            },
+            {
+                path: 'reader',
+                title: 'Найти читателя',
+                component: ReaderComponent,
+            }
+        ]
     },
     {
         path: 'reports',
