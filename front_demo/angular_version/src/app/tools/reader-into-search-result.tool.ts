@@ -19,10 +19,10 @@ export function readerIntoSearchResult(reader: Reader, findPattern: string): Sea
     }
 
     else if (reader.card.toLowerCase().includes(findPattern.toLowerCase())) {
-        const substrIndex = reader.name.toLowerCase().indexOf(findPattern.toLowerCase())
+        const substrIndex = reader.card.toLowerCase().indexOf(findPattern.toLowerCase())
         result.textBeforeHighlight = [reader.name, reader.card.slice(0, substrIndex)].join(' ');
         result.textAfterHighlight = reader.card.slice(substrIndex + findPattern.length, reader.card.length);
-        result.highlightedText = findPattern;
+        result.highlightedText = reader.card.slice(substrIndex, substrIndex + findPattern.length);
     }
 
     return result;
