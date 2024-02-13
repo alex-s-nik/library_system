@@ -6,6 +6,7 @@ import { MainComponent } from './pages/main/main.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { ReaderComponent } from './pages/lending/reader/reader.component';
 import { WrapperComponent } from './pages/lending/wrapper/wrapper.component';
+import { ReaderDetailComponent } from './pages/lending/reader-detail/reader-detail.component';
 
 export const routes: Routes = [
     {
@@ -32,6 +33,11 @@ export const routes: Routes = [
                 path: 'reader',
                 title: 'Найти читателя',
                 component: ReaderComponent,
+            },
+            {
+                path: 'reader/:id',
+                title: 'Выдача книг',
+                component: ReaderDetailComponent
             }
         ]
     },
