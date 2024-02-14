@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 
 import { Reader } from './interfaces/reader.inteface';
 import { READERS } from './mock-readers';
@@ -21,5 +21,10 @@ export class ReaderService {
     )
 
     return of(findedReaders)
+  }
+
+  getReaderById(id: number) {
+    const reader = READERS.find(r => r.id === id)!;
+    return of(reader);
   }
 }

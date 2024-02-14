@@ -5,17 +5,17 @@
     </div>
     <div class="reader_lending__reader-info">
         <div class="reader_lending__reader-info__name" id="reader_lending__reader-info__name">
-            Reader's name
+            {{reader?.name}}
         </div>
         <div class="reader_lending__reader-info__info" id="reader_lending__reader-info__info">
             <p>
-                Reader's info
+                Читательский билет №{{reader?.card}}
             </p>
             <p>
-                <a href="#">Change...</a>
+                <a href="#">Изменить...</a>
             </p>
         </div>
-        <div class="reader_lending__reader-info__books_info">
+        <div *ngIf="reader?.lendingFacts?.length; else elseBlock" class="reader_lending__reader-info__books_info">
             <table class="table caption-top" id="reader_lending__reader-info__books_info_table">
                 <caption>Информация о выданных книгах</caption>
                 <tr>
@@ -23,7 +23,15 @@
                     <th>Выдана</th>
                     <th>Возвращена</th>
                 </tr>
+                <tr *ngFor="let fact of reader?.lendingFacts">
+                    <td>{{fact.bookId}}</td>
+                    <td>{{fact.takenDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{fact.returnedDate | date: 'dd/MM/yyyy'}}</td>
+                </tr>
             </table>
         </div>
+        <ng-template #elseBlock>
+            Читатель еще не брал книг.
+        </ng-template>
     </div>
 </div>

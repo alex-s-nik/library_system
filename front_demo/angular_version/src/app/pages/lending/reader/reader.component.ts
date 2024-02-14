@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import { ReaderService } from '../../../reader.service';
 import { SearchResult } from '../../../interfaces/search-result.interface';
@@ -9,7 +10,7 @@ import { readerIntoSearchResult } from '../../../tools/reader-into-search-result
 @Component({
   selector: 'app-reader',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, RouterLink],
   templateUrl: './reader.component.html',
   styleUrl: './reader.component.less'
 })

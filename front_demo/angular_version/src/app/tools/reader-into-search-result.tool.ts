@@ -1,9 +1,9 @@
-import { find } from "rxjs";
 import { Reader } from "../interfaces/reader.inteface";
 import { SearchResult } from "../interfaces/search-result.interface";
 
 export function readerIntoSearchResult(reader: Reader, findPattern: string): SearchResult {
     let result: SearchResult = {
+        reader_id: 0,
         textBeforeHighlight: '',
         highlightedText: '',
         textAfterHighlight: ''
@@ -24,6 +24,6 @@ export function readerIntoSearchResult(reader: Reader, findPattern: string): Sea
         result.textAfterHighlight = reader.card.slice(substrIndex + findPattern.length, reader.card.length);
         result.highlightedText = reader.card.slice(substrIndex, substrIndex + findPattern.length);
     }
-
+    result.reader_id = reader.id;
     return result;
 }
