@@ -28,7 +28,9 @@ jobs:
                 ${{ runner.os }}-node-
 
         - name: Install dependencies
-          run: npm install
+          run:  |
+            npm install
+            npm i -g @angular/cli
         
         - name: Build
           run: ng build
