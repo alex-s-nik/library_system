@@ -45,5 +45,5 @@ jobs:
             username: ${{ secrets.FRONT_DEMO_SSH_USERNAME }}	
             key: ${{ secrets.FRONT_DEMO_SSH_KEY }}	
             port: ${{ secrets.FRONT_DEMO_SSH_PORT }}	
-            source: "/src/dist/angular_version"	
+            source: "/dist/angular_version/**"	
             target: "/var/www/html"
