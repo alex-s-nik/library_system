@@ -33,7 +33,10 @@ jobs:
             npm i -g @angular/cli
         
         - name: Build
-          run: ng build
+          run: |
+            ls
+            ng build
+            ls
         
         - name: copy file via ssh password	
           uses: appleboy/scp-action@v0.1.7	
