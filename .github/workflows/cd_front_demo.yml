@@ -12,7 +12,7 @@ jobs:
               working-directory: 'front_demo/angular_version'
         steps:
         - name: Checkout
-          uses: actions/actions/checkout@v4
+          uses: actions/checkout@v4
 
         - name: Setup Node.js
           uses: actions/setup-node@v4
