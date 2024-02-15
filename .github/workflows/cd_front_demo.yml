@@ -36,7 +36,7 @@ jobs:
           run: |
             ls
             ng build
-            ls
+            ls dist
         
         - name: copy file via ssh password	
           uses: appleboy/scp-action@v0.1.7	
