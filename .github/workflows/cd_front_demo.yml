@@ -29,8 +29,8 @@ jobs:
 
         - name: Install dependencies and Angular
           run:  |
-            npm install
             npm i -g @angular/cli
+            npm install
         
         - name: Build
           run: ng build
@@ -42,6 +42,6 @@ jobs:
             username: ${{ secrets.FRONT_DEMO_SSH_USERNAME }}	
             key: ${{ secrets.FRONT_DEMO_SSH_KEY }}	
             port: ${{ secrets.FRONT_DEMO_SSH_PORT }}	
-            source: "front_demo/angular_version/dist/angular_version/*.*"	
+            source: "/front_demo/angular_version/dist/angular_version/*.*"	
             target: "/var/www/html"
             rm: true
