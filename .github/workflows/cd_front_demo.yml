@@ -45,3 +45,4 @@ jobs:
             source: "front_demo/angular_version/dist/angular_version/browser/*"	
             target: "/var/www/html"
             rm: true
+            strip_components: 5
