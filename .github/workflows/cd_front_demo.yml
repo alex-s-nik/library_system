@@ -1,5 +1,5 @@
         
-name: 'CI for Demo Front Library'	
+name: 'CI for Demo Front Library v.2'	
 
 on:	
     push:	
@@ -27,18 +27,15 @@ jobs:
             restore-keys: |
                 ${{ runner.os }}-node-
 
-        - name: Install dependencies
+        - name: Install dependencies and Angular
           run:  |
             npm install
             npm i -g @angular/cli
         
         - name: Build
-          run: |
-            ls
-            ng build
-            ls dist/angular_version
+          run: ng build
         
-        - name: copy file via ssh password	
+        - name: Copy file via SSH
           uses: appleboy/scp-action@v0.1.7	
           with:	
             host: ${{ secrets.FRONT_DEMO_SSH_HOST }}	
@@ -47,3 +44,4 @@ jobs:
             port: ${{ secrets.FRONT_DEMO_SSH_PORT }}	
             source: "front_demo/angular_version/dist/angular_version/*.*"	
             target: "/var/www/html"
+            rm: true
