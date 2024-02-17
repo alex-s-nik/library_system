@@ -48,6 +48,10 @@ export const routes: Routes = [
         title: 'Отчеты'
     },
     {
+        path: '404',
+        component: NotFoundComponent
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }
