@@ -7,6 +7,7 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { ReaderComponent } from './pages/lending/reader/reader.component';
 import { WrapperComponent } from './pages/lending/wrapper/wrapper.component';
 import { ReaderDetailComponent } from './pages/lending/reader-detail/reader-detail.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
     {
@@ -45,5 +46,9 @@ export const routes: Routes = [
         path: 'reports',
         component: ReportsComponent,
         title: 'Отчеты'
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
     }
 ];
