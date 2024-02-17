@@ -1,0 +1,631 @@
+{
+  "readers": [
+    {
+      "name": "Авдей Валерианович Прохоров",
+      "card": "30593567334385383506",
+      "lending_facts": [
+        {
+          "id": 9,
+          "book_id": 1,
+          "taken_date": "2020-05-15",
+          "returned_date": "2020-05-30"
+        },
+        {
+          "id": 13,
+          "book_id": 6,
+          "taken_date": "2020-07-15",
+          "returned_date": "2020-09-13"
+        },
+        {
+          "id": 63,
+          "book_id": 8,
+          "taken_date": "2022-08-08",
+          "returned_date": "2023-03-22"
+        },
+        {
+          "id": 95,
+          "book_id": 18,
+          "taken_date": "2023-12-04",
+          "returned_date": "2023-12-19"
+        }
+      ],
+      "id": 0
+    },
+    {
+      "name": "Пантелеймон Арсенович Рыбаков",
+      "card": "81011954961183402574",
+      "lending_facts": [
+        {
+          "id": 7,
+          "book_id": 12,
+          "taken_date": "2020-04-15",
+          "returned_date": "2020-07-30"
+        },
+        {
+          "id": 18,
+          "book_id": 6,
+          "taken_date": "2020-09-28",
+          "returned_date": "2020-10-28"
+        },
+        {
+          "id": 32,
+          "book_id": 15,
+          "taken_date": "2021-04-27",
+          "returned_date": "2021-06-12"
+        },
+        {
+          "id": 76,
+          "book_id": 11,
+          "taken_date": "2023-02-20",
+          "returned_date": null
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "Сорокина Агата Юрьевна",
+      "card": "58354400808196615265",
+      "lending_facts": [
+        {
+          "id": 48,
+          "book_id": 3,
+          "taken_date": "2021-12-25",
+          "returned_date": "2023-04-06"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "name": "Кир Терентьевич Ермаков",
+      "card": "53941408977879617908",
+      "lending_facts": [
+        {
+          "id": 54,
+          "book_id": 18,
+          "taken_date": "2022-03-25",
+          "returned_date": "2023-03-07"
+        },
+        {
+          "id": 55,
+          "book_id": 12,
+          "taken_date": "2022-04-09",
+          "returned_date": "2022-05-09"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "name": "Владимир Абрамович Васильев",
+      "card": "48134400116226289312",
+      "lending_facts": [
+        {
+          "id": 4,
+          "book_id": 2,
+          "taken_date": "2020-03-01",
+          "returned_date": "2020-06-30"
+        },
+        {
+          "id": 45,
+          "book_id": 0,
+          "taken_date": "2021-11-09",
+          "returned_date": "2022-02-08"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "name": "Владимир Жанович Архипов",
+      "card": "25480768148595060840",
+      "lending_facts": [
+        {
+          "id": 97,
+          "book_id": 7,
+          "taken_date": "2024-01-03",
+          "returned_date": null
+        }
+      ],
+      "id": 5
+    },
+    {
+      "name": "Виктор Борисович Павлов",
+      "card": "41133799834825605027",
+      "lending_facts": [
+        {
+          "id": 25,
+          "book_id": 10,
+          "taken_date": "2021-01-12",
+          "returned_date": "2021-03-13"
+        },
+        {
+          "id": 59,
+          "book_id": 17,
+          "taken_date": "2022-06-09",
+          "returned_date": "2023-02-05"
+        }
+      ],
+      "id": 6
+    },
+    {
+      "name": "Кулагина Вера Константиновна",
+      "card": "37966725902708540993",
+      "lending_facts": [
+        {
+          "id": 71,
+          "book_id": 5,
+          "taken_date": "2022-12-07",
+          "returned_date": "2023-07-06"
+        }
+      ],
+      "id": 7
+    },
+    {
+      "name": "Кира Руслановна Волкова",
+      "card": "68941702042090729961",
+      "lending_facts": [
+        {
+          "id": 5,
+          "book_id": 14,
+          "taken_date": "2020-03-16",
+          "returned_date": "2020-04-30"
+        },
+        {
+          "id": 39,
+          "book_id": 17,
+          "taken_date": "2021-08-11",
+          "returned_date": "2021-10-25"
+        },
+        {
+          "id": 50,
+          "book_id": 19,
+          "taken_date": "2022-01-24",
+          "returned_date": "2023-04-21"
+        },
+        {
+          "id": 88,
+          "book_id": 17,
+          "taken_date": "2023-08-20",
+          "returned_date": null
+        }
+      ],
+      "id": 8
+    },
+    {
+      "name": "Август Валерьянович Давыдов",
+      "card": "03123999278659533842",
+      "lending_facts": [
+        {
+          "id": 15,
+          "book_id": 14,
+          "taken_date": "2020-08-14",
+          "returned_date": "2020-08-29"
+        },
+        {
+          "id": 36,
+          "book_id": 10,
+          "taken_date": "2021-06-27",
+          "returned_date": "2021-07-12"
+        },
+        {
+          "id": 40,
+          "book_id": 4,
+          "taken_date": "2021-08-26",
+          "returned_date": "2022-09-07"
+        },
+        {
+          "id": 56,
+          "book_id": 8,
+          "taken_date": "2022-04-24",
+          "returned_date": "2022-07-24"
+        },
+        {
+          "id": 89,
+          "book_id": 13,
+          "taken_date": "2023-09-04",
+          "returned_date": null
+        }
+      ],
+      "id": 9
+    },
+    {
+      "name": "Алевтина Филипповна Титова",
+      "card": "52646121976613981688",
+      "lending_facts": [
+        {
+          "id": 6,
+          "book_id": 19,
+          "taken_date": "2020-03-31",
+          "returned_date": "2020-06-14"
+        },
+        {
+          "id": 42,
+          "book_id": 10,
+          "taken_date": "2021-09-25",
+          "returned_date": "2024-01-18"
+        },
+        {
+          "id": 47,
+          "book_id": 18,
+          "taken_date": "2021-12-10",
+          "returned_date": "2022-02-23"
+        },
+        {
+          "id": 60,
+          "book_id": 12,
+          "taken_date": "2022-06-24",
+          "returned_date": "2023-11-04"
+        },
+        {
+          "id": 82,
+          "book_id": 2,
+          "taken_date": "2023-05-22",
+          "returned_date": null
+        }
+      ],
+      "id": 10
+    },
+    {
+      "name": "Андреева Валерия Анатольевна",
+      "card": "58940083621318893639",
+      "lending_facts": [
+        {
+          "id": 27,
+          "book_id": 16,
+          "taken_date": "2021-02-11",
+          "returned_date": "2021-04-12"
+        },
+        {
+          "id": 28,
+          "book_id": 19,
+          "taken_date": "2021-02-26",
+          "returned_date": "2021-03-28"
+        }
+      ],
+      "id": 11
+    },
+    {
+      "name": "Светлана Робертовна Михайлова",
+      "card": "70522526878065354076",
+      "lending_facts": [
+        {
+          "id": 41,
+          "book_id": 7,
+          "taken_date": "2021-09-10",
+          "returned_date": "2021-10-10"
+        },
+        {
+          "id": 69,
+          "book_id": 4,
+          "taken_date": "2022-11-06",
+          "returned_date": "2023-01-21"
+        }
+      ],
+      "id": 12
+    },
+    {
+      "name": "Кудрявцева Ирина Болеславовна",
+      "card": "94092743038980975088",
+      "lending_facts": [
+        {
+          "id": 0,
+          "book_id": 13,
+          "taken_date": "2020-01-01",
+          "returned_date": "2020-02-15"
+        },
+        {
+          "id": 1,
+          "book_id": 9,
+          "taken_date": "2020-01-16",
+          "returned_date": "2020-01-31"
+        },
+        {
+          "id": 73,
+          "book_id": 14,
+          "taken_date": "2023-01-06",
+          "returned_date": "2023-08-05"
+        },
+        {
+          "id": 81,
+          "book_id": 17,
+          "taken_date": "2023-05-07",
+          "returned_date": "2023-06-06"
+        }
+      ],
+      "id": 13
+    },
+    {
+      "name": "Соловьева Акулина Сергеевна",
+      "card": "07951157624707982511",
+      "lending_facts": [
+        {
+          "id": 19,
+          "book_id": 10,
+          "taken_date": "2020-10-13",
+          "returned_date": "2020-12-12"
+        },
+        {
+          "id": 24,
+          "book_id": 1,
+          "taken_date": "2020-12-28",
+          "returned_date": "2021-01-27"
+        },
+        {
+          "id": 53,
+          "book_id": 2,
+          "taken_date": "2022-03-10",
+          "returned_date": "2022-11-22"
+        },
+        {
+          "id": 61,
+          "book_id": 5,
+          "taken_date": "2022-07-09",
+          "returned_date": "2022-08-23"
+        },
+        {
+          "id": 90,
+          "book_id": 16,
+          "taken_date": "2023-09-19",
+          "returned_date": "2024-02-02"
+        }
+      ],
+      "id": 14
+    },
+    {
+      "name": "Потап Данилович Кузнецов",
+      "card": "71573878349005153176",
+      "lending_facts": [
+        {
+          "id": 21,
+          "book_id": 18,
+          "taken_date": "2020-11-12",
+          "returned_date": "2020-11-27"
+        },
+        {
+          "id": 38,
+          "book_id": 15,
+          "taken_date": "2021-07-27",
+          "returned_date": "2022-12-22"
+        },
+        {
+          "id": 46,
+          "book_id": 6,
+          "taken_date": "2021-11-24",
+          "returned_date": null
+        },
+        {
+          "id": 49,
+          "book_id": 7,
+          "taken_date": "2022-01-09",
+          "returned_date": "2022-09-22"
+        },
+        {
+          "id": 84,
+          "book_id": 8,
+          "taken_date": "2023-06-21",
+          "returned_date": null
+        }
+      ],
+      "id": 15
+    },
+    {
+      "name": "Артемьева Кира Алексеевна",
+      "card": "37963127618075906113",
+      "lending_facts": [
+        {
+          "id": 67,
+          "book_id": 9,
+          "taken_date": "2022-10-07",
+          "returned_date": "2023-07-21"
+        }
+      ],
+      "id": 16
+    },
+    {
+      "name": "Зоя Аркадьевна Орехова",
+      "card": "59269901575705056724",
+      "lending_facts": [
+        {
+          "id": 58,
+          "book_id": 1,
+          "taken_date": "2022-05-25",
+          "returned_date": "2022-10-22"
+        },
+        {
+          "id": 91,
+          "book_id": 1,
+          "taken_date": "2023-10-04",
+          "returned_date": null
+        },
+        {
+          "id": 92,
+          "book_id": 19,
+          "taken_date": "2023-10-19",
+          "returned_date": "2023-11-19"
+        }
+      ],
+      "id": 17
+    },
+    {
+      "name": "Эраст Трифонович Фадеев",
+      "card": "68993720725167790302",
+      "lending_facts": [
+        {
+          "id": 33,
+          "book_id": 18,
+          "taken_date": "2021-05-12",
+          "returned_date": "2021-05-27"
+        }
+      ],
+      "id": 18
+    },
+    {
+      "name": "Никитина Лариса Петровна",
+      "card": "52620535666689859835",
+      "lending_facts": [],
+      "id": 19
+    }
+  ],
+  "books": [
+    {
+      "title": "Грустный хотеть солнце.",
+      "author": "Гусев Е. Ч.",
+      "pages": 1904,
+      "year": 1918,
+      "taken_by": null,
+      "id": 0
+    },
+    {
+      "title": "Угодный темнеть.",
+      "author": "Костина Р. Ю.",
+      "pages": 1204,
+      "year": 2017,
+      "taken_by": 17,
+      "id": 1
+    },
+    {
+      "title": "За пространство князь интеллектуальный.",
+      "author": "Комарова К. А.",
+      "pages": 881,
+      "year": 1953,
+      "taken_by": 10,
+      "id": 2
+    },
+    {
+      "title": "Головка один бровь мимо.",
+      "author": "Шубина К. И.",
+      "pages": 1246,
+      "year": 1948,
+      "taken_by": null,
+      "id": 3
+    },
+    {
+      "title": "Художественный зарплата через рис.",
+      "author": "Григорьева Б. Е.",
+      "pages": 1518,
+      "year": 1911,
+      "taken_by": null,
+      "id": 4
+    },
+    {
+      "title": "Магазин аллея вообще функция.",
+      "author": "Кудряшов А. В.",
+      "pages": 449,
+      "year": 1963,
+      "taken_by": null,
+      "id": 5
+    },
+    {
+      "title": "Вряд угодный интеллектуальный.",
+      "author": "Воронов Г. А.",
+      "pages": 873,
+      "year": 1908,
+      "taken_by": 15,
+      "id": 6
+    },
+    {
+      "title": "Обида посидеть.",
+      "author": "Захаров К. Ю.",
+      "pages": 1799,
+      "year": 1958,
+      "taken_by": 5,
+      "id": 7
+    },
+    {
+      "title": "Крыса рота помолчать.",
+      "author": "Медведев Т. С.",
+      "pages": 1211,
+      "year": 1964,
+      "taken_by": 15,
+      "id": 8
+    },
+    {
+      "title": "Изменение оборот спалить.",
+      "author": "Родионов Г. А.",
+      "pages": 671,
+      "year": 1941,
+      "taken_by": null,
+      "id": 9
+    },
+    {
+      "title": "Войти коллектив потрясти остановить.",
+      "author": "Некрасов Н. И.",
+      "pages": 1375,
+      "year": 2002,
+      "taken_by": null,
+      "id": 10
+    },
+    {
+      "title": "Песенка школьный основание.",
+      "author": "Федотова К. Э.",
+      "pages": 49,
+      "year": 1905,
+      "taken_by": 1,
+      "id": 11
+    },
+    {
+      "title": "Фонарик подземный.",
+      "author": "Гришин С. А.",
+      "pages": 1148,
+      "year": 1945,
+      "taken_by": null,
+      "id": 12
+    },
+    {
+      "title": "Свежий природа девка.",
+      "author": "Киселев Б. В.",
+      "pages": 2363,
+      "year": 2006,
+      "taken_by": 9,
+      "id": 13
+    },
+    {
+      "title": "Возникновение покидать какой спешить.",
+      "author": "Самсонов М. Г.",
+      "pages": 824,
+      "year": 1978,
+      "taken_by": null,
+      "id": 14
+    },
+    {
+      "title": "Результат спасть пятеро.",
+      "author": "Комарова К. Х.",
+      "pages": 1474,
+      "year": 2020,
+      "taken_by": null,
+      "id": 15
+    },
+    {
+      "title": "Один бочок металл.",
+      "author": "Петров А. С.",
+      "pages": 1573,
+      "year": 1930,
+      "taken_by": null,
+      "id": 16
+    },
+    {
+      "title": "Спешить актриса человечек слишком покидать.",
+      "author": "Власова О. Р.",
+      "pages": 1441,
+      "year": 2006,
+      "taken_by": 8,
+      "id": 17
+    },
+    {
+      "title": "Нажать иной терапия космос очередной.",
+      "author": "Лукин М. А.",
+      "pages": 823,
+      "year": 1993,
+      "taken_by": null,
+      "id": 18
+    },
+    {
+      "title": "Ставить деньги правильный направо.",
+      "author": "Егоров Л. Я.",
+      "pages": 1495,
+      "year": 1936,
+      "taken_by": null,
+      "id": 19
+    }
+  ],
+  "taken_facts": 54,
+  "returned_facts": 46
+}
