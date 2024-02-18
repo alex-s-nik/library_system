@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-import { SearchResult } from '../../../interfaces/search-result.interface';
+import { SearchReaderResult } from '../../../interfaces/search-result.interface';
 
 import { readerIntoSearchResult } from '../../../tools/reader-into-search-result.tool';
 import { LibraryService } from '../../../library.service';
@@ -16,7 +16,7 @@ import { LibraryService } from '../../../library.service';
 })
 export class ReaderComponent {
 
-  searchResults: SearchResult[] = [];
+  searchResults: SearchReaderResult[] = [];
 
   searchedText?: string;
 

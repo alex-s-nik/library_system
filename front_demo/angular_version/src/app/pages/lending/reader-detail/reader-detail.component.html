@@ -1,7 +1,22 @@
 <div class="reader_lending__content_wrapper">
 
-    <div class="reader_lending__lending">
-        
+    <div class="reader_lending__lending d-flex flex-column w-50 align-items-center">
+        <div class="reader_lending__search_book mt-5">
+            <div class="input-group">
+                <input (input)="findBooks($event)" type="text" class="form-control"
+                  placeholder="Название книги...">
+              </div>
+        </div>
+        <div class="reader_lending__search_results mt-2 overflow-y-scroll h-75">
+            <table class="table table-striped">
+                <tbody>
+                  <tr *ngFor="let book of books">
+                    <td>{{book.author}} {{book.title}} / {{book.author}}; - {{book.year}}. - {{book.pages}} с.</td>
+                    <td (click)="takeBook(reader!.id, book.id)">+</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
     </div>
     <div class="reader_lending__reader-info">
         <div class="reader_lending__reader-info__name" id="reader_lending__reader-info__name">

@@ -12,7 +12,7 @@
   </div>
   <div id="find_reader_result">
     <p class="find_results__reader" *ngFor="let searchResult of searchResults">
-      <a routerLink="{{searchResult.reader_id}}" class="btn btn-light" role="button">
+      <a routerLink="{{searchResult.readerId}}" class="btn btn-light" role="button">
         {{searchResult.textBeforeHighlight}}<span class="find-reader__highlighted-text">{{searchResult.highlightedText}}</span>{{searchResult.textAfterHighlight}}
       </a>
     </p>
