@@ -5,4 +5,5 @@ export interface Book {
     pages: number;
     year: number;
     takenBy: number;
+    takenByInfo: string;
 }
