@@ -24,7 +24,7 @@
                     <th>Возвращена</th>
                 </tr>
                 <tr *ngFor="let fact of reader?.lendingFacts">
-                    <td>{{fact.bookId}}</td>
+                    <td>{{fact.bookInfo}}</td>
                     <td>{{fact.takenDate | date: 'dd/MM/yyyy'}}</td>
                     <td>{{fact.returnedDate | date: 'dd/MM/yyyy'}}</td>
                 </tr>

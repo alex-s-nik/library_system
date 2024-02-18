@@ -9,6 +9,8 @@ import { ReaderComponent } from './pages/lending/reader/reader.component';
 
 import { MenuComponent } from './pages/_shared/menu/menu.component';
 
+import { LibraryService } from './library.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -26,6 +28,8 @@ import { MenuComponent } from './pages/_shared/menu/menu.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
-export class AppComponent {
-  title = 'angular_version';
+export class AppComponent{
+  constructor(private libraryService: LibraryService) { 
+    this.libraryService.loadInitialDB();
+  }
 }

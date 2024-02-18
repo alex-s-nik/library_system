@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { NgIf, NgFor } from '@angular/common';
 import { DatePipe } from '@angular/common';
-import { ReaderService } from '../../../reader.service';
+import { LibraryService } from '../../../library.service';
 import { Reader } from '../../../interfaces/reader.inteface';
 
 @Component({
@@ -15,7 +15,7 @@ import { Reader } from '../../../interfaces/reader.inteface';
 export class ReaderDetailComponent implements OnInit {
   reader?: Reader;
 
-  constructor(private readerService: ReaderService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private libraryService: LibraryService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getReader();
@@ -26,6 +26,6 @@ export class ReaderDetailComponent implements OnInit {
 
   getReader(): void {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.readerService.getReaderById(id).subscribe(reader => this.reader = reader);
+    this.libraryService.getReaderById(id).subscribe(reader => this.reader = reader);
   }
 }
