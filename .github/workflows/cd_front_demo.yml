@@ -4,6 +4,8 @@ name: 'CI for Demo Front Library v.2'
 on:	
     push:	
         branches: [frontend_demo]
+    pull_request:
+        branches: [frontend_demo]
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
