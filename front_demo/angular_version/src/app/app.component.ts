@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AcquisitionComponent } from './pages/acquisition/acquisition.component';
 import { LendingComponent } from './pages/lending/lending.component';
@@ -15,6 +16,7 @@ import { LibraryService } from './library.service';
   selector: 'app-root',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,

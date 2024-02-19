@@ -9,15 +9,22 @@ import { LendingFact } from './interfaces/lenging-fact.inteface';
   providedIn: 'root'
 })
 export class LibraryService {
-
-  constructor(private httpClient: HttpClient) { }
-
+  
+  constructor(private httpClient: HttpClient) { 
+    this.httpClient.get('assets/data.json').subscribe(
+      data => {
+        this._libraryData = data;
+        this._last_reader_id = this._libraryData.readers.length;
+      }
+      );
+    }
+    
+  private _last_reader_id: number = 0;
   private _libraryData: any;
 
+
   loadInitialDB(): void {
-    this.httpClient.get('assets/data.json').subscribe(
-      data => this._libraryData = data
-    );
+    
   }
 
   getReaderByNameOrCard(pattern: string): Observable<Reader[]> {
@@ -40,7 +47,7 @@ export class LibraryService {
     const books: Book[] = this._libraryData.books;
     return of(
       books.filter(
-        (b: Book) => (b.title.toLowerCase().includes(pattern.toLowerCase()) || b.author.toLowerCase().includes(pattern.toLowerCase())) && b.takenBy !== null
+        (b: Book) => (b.title.toLowerCase().includes(pattern.toLowerCase()) || b.author.toLowerCase().includes(pattern.toLowerCase())) && b.takenBy === null
       )
     );
   }
@@ -61,4 +68,19 @@ export class LibraryService {
     book.takenBy = reader.id;
     book.takenByInfo = reader.name;
   }
+
+  createReader(readerDto: ReaderCreateDto):void {
+    const reader: Reader = {
+      id: this._last_reader_id++,
+      name: readerDto.name,
+      card: readerDto.card,
+      lendingFacts: []
+    };
+    this._libraryData.readers.push(reader);
+  }
+}
+
+export type ReaderCreateDto = {
+  name: string;
+  card: string;
 }
