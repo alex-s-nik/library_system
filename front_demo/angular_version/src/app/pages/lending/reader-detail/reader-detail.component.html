@@ -1,33 +1,14 @@
 <div class="reader_lending__content_wrapper">
-
-    <div class="reader_lending__lending d-flex flex-column w-50 align-items-center">
-        <div class="reader_lending__search_book mt-5">
-            <div class="input-group">
-                <input (input)="findBooks($event)" type="text" class="form-control"
-                  placeholder="Название книги...">
-              </div>
-        </div>
-        <div class="reader_lending__search_results mt-2 overflow-y-scroll h-75">
-            <table class="table table-striped">
-                <tbody>
-                  <tr *ngFor="let book of books">
-                    <td>{{book.author}} {{book.title}} / {{book.author}}; - {{book.year}}. - {{book.pages}} с.</td>
-                    <td (click)="takeBook(reader!.id, book.id)">+</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
-    </div>
     <div class="reader_lending__reader-info">
         <div class="reader_lending__reader-info__name" id="reader_lending__reader-info__name">
-            {{reader?.name}}
+            <p><span class="bolded">{{reader?.name}}</span></p>
+            <p class="toRight">
+                <a href=""> Изменить</a> | <a href=""> Посмотреть профиль читателя</a>
+            </p>
         </div>
         <div class="reader_lending__reader-info__info" id="reader_lending__reader-info__info">
             <p>
                 Читательский билет №{{reader?.card}}
-            </p>
-            <p>
-                <a href="#">Изменить...</a>
             </p>
         </div>
         <div *ngIf="reader?.lendingFacts?.length; else elseBlock" class="reader_lending__reader-info__books_info">
@@ -48,5 +29,40 @@
         <ng-template #elseBlock>
             Читатель еще не брал книг.
         </ng-template>
+    </div>
+    <div class="all-books">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <td>Кузьмин С. Я. Сомнительный горький ставить дьявол. / Кузьмин С. Я.; - 1950. - 1939 с.</td>
+                <td>+</td>
+            </tr>
+            <tr>
+                <td>Мартынов А. Р. Мрачно спорт покинуть. / Мартынов А. Р.; - 1982. - 2114 с.</td>
+                <td>+</td>
+            </tr>
+            <tr>
+                <td>Сафонова Д. В. Приятель обида пространство. / Сафонова Д. В.; - 1959. - 33 с.</td>
+                <td>+</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="books-for-lending">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <td>Сафонова Д. В. Приятель обида пространство 2. / Сафонова Д. В.; - 1960. - 15 с.</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Комаров Е. Г. Помимо выраженный печатать сбросить. / Комаров Е. Г.; - 1977. - 1941 с.</td>
+                <td>-</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="lending-button">
+        <a href="#" class="btn btn-primary" role="button">Выдать</a>
     </div>
 </div>
