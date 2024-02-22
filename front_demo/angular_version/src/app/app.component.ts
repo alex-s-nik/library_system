@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -30,8 +30,10 @@ import { LibraryService } from './library.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
   constructor(private libraryService: LibraryService) { 
+  }
+  ngOnInit(): void {
     this.libraryService.loadInitialDB();
   }
 }
