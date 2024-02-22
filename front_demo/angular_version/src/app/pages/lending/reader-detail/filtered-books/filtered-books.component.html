@@ -1,14 +1,16 @@
 <div class="all-books">
   <table class="table table-hover">
-    <tbody>
-      <tr
-        *ngFor="let book of untakenBooksList"
-        (click)="addBookToLendingList(book.id)"
-        class="cursor-pointer"
-      >
-        <td>{{ book.title }}</td>
-        <td>+</td>
-      </tr>
-    </tbody>
+    <caption>
+      …
+    </caption>
+
+    <tr
+      *ngFor="let book of untakenBooksList"
+      (click)="addBookToLendingList(book.id)"
+      class="cursor-pointer"
+    >
+      <td>{{ book.title }}</td>
+      <td>+</td>
+    </tr>
   </table>
 </div>

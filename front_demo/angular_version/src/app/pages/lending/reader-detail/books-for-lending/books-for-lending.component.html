@@ -1,14 +1,12 @@
 <div class="books-for-lending">
   <table class="table table-hover">
-    <tbody>
-      <tr
-        *ngFor="let book of listForlendingBooks"
-        (click)="removeBookFromLendingList(book.id)"
-        class="cursor-pointer"
-      >
-        <td>{{ book.title }}</td>
-        <td>-</td>
-      </tr>
-    </tbody>
+    <tr
+      *ngFor="let book of listForlendingBooks"
+      (click)="removeBookFromLendingList(book.id)"
+      class="cursor-pointer"
+    >
+      <td>{{ book.title }}</td>
+      <td>-</td>
+    </tr>
   </table>
 </div>

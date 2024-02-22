@@ -7,6 +7,7 @@ import { Reader } from '../../../interfaces/reader.inteface';
 import { Book } from '../../../interfaces/book.inteface';
 import { FilteredBooksComponent } from './filtered-books/filtered-books.component';
 import { BooksForLendingComponent } from './books-for-lending/books-for-lending.component';
+import { log } from 'console';
 
 @Component({
   selector: 'app-reader-detail',
@@ -52,6 +53,20 @@ export class ReaderDetailComponent implements OnInit {
 
   takeBook(readerId: number, bookId: number): void {
     this.libraryService.takeBookToReader(readerId, bookId);
+  }
+
+  lendListBooksToReader(): void {
+    this._lendListBooksToReader(this.listForlendingBooks, this.reader!);
+    this.listForlendingBooks = [];
+  }
+  /**
+   * Выдать книги читателю reader из списка для выдачи книг текущему читателю.
+   * 
+   * @param listBooks список книг, которые будут выданы
+   * @param reader читатель
+   */
+  _lendListBooksToReader(listBooks: Book[], reader: Reader): void {
+    this.libraryService.lendListBooksToReader(listBooks, reader);
   }
 
   /**

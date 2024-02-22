@@ -51,6 +51,12 @@
     (changeLendingList)="removeBookFromOrderListHandler($event)"
   ></app-books-for-lending>
   <div class="lending-button">
-    <a href="#" class="btn btn-primary" role="button">Выдать</a>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="lendListBooksToReader()"
+    >
+      Выдать
+    </button>
   </div>
 </div>

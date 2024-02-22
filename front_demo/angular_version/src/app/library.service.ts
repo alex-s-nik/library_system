@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Reader } from './interfaces/reader.inteface';
 import { Book } from './interfaces/book.inteface';
 import { LendingFact } from './interfaces/lenging-fact.inteface';
+import * as bookData from '../assets/data.json';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,7 @@ import { LendingFact } from './interfaces/lenging-fact.inteface';
 export class LibraryService {
   
   constructor(private httpClient: HttpClient) { 
-    this.httpClient.get('assets/data.json').subscribe(
-      data => {
-        this._libraryData = data;
-        this._last_reader_id = this._libraryData.readers.length;
-      }
-      );
+    this.loadInitialDB();
     }
     
   private _last_reader_id: number = 0;
@@ -24,7 +20,7 @@ export class LibraryService {
 
 
   loadInitialDB(): void {
-    
+    this._libraryData = bookData;
   }
 
   getReaderByNameOrCard(pattern: string): Observable<Reader[]> {
@@ -77,6 +73,24 @@ export class LibraryService {
     reader.lendingFacts.push(lendingFact);
     book.takenBy = reader.id;
     book.takenByInfo = reader.name;
+  }
+
+  lendListBooksToReader(listBooks: Book[], reader: Reader): void {
+    let currentLendingFact: LendingFact;
+
+    for (let book of listBooks) {
+      book.takenBy = reader.id;
+      book.takenByInfo = reader.name;
+
+      currentLendingFact = {
+        id: 9000 + Math.floor((Math.random() * 100) + 1),
+        bookId: book.id,
+        bookInfo: `${book.author} ${book.title} / ${book.author}; - ${book.year}. - ${book.pages} с.`,
+        takenDate: new Date(),
+        returnedDate: null
+      }
+      reader.lendingFacts.push(currentLendingFact);
+    }
   }
 
   createReader(readerDto: ReaderCreateDto):void {
