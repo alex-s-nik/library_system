@@ -4,6 +4,6 @@ export interface Book {
     author: string;
     pages: number;
     year: number;
-    takenBy: number;
-    takenByInfo: string;
+    takenBy: number | null;
+    takenByInfo: string | null;
 }

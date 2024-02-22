@@ -58,6 +58,11 @@ export class LibraryService {
     return books.filter((book) => book.takenBy === null);
   }
 
+  getTakenBooks(): Book[] {
+    const books: Book[] = this._libraryData.books;
+    return books.filter((book) => book.takenBy !== null);
+  }
+
   takeBookToReader(readerId: number, bookId: number): void {
     const reader: Reader = this._libraryData.readers.find((r: Reader) => r.id === readerId);
     const book: Book = this._libraryData.books.find((b: Book) => b.id === bookId);
@@ -102,7 +107,23 @@ export class LibraryService {
     };
     this._libraryData.readers.push(reader);
   }
+  returnBookToLibrary(bookId: number): void {
+    const book: Book = this._libraryData.books.find((book: Book) => book.id === bookId);
+
+    book.takenBy = null;
+    book.takenByInfo = null;
+
+    for (let reader of this._libraryData.readers) {
+      for (let lendingFact of reader.lendingFacts) {
+        if (lendingFact.bookId === bookId && lendingFact.returnedDate === null) {
+          lendingFact.returnedDate = new Date();
+          return;
+        }
+      }
+    }
+  }
 }
+
 
 export type ReaderCreateDto = {
   name: string;

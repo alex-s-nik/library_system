@@ -1,0 +1,48 @@
+<div class="wrapper d-flex m-3">
+
+
+<div class="taken_books w-50">
+    <table class="table caption-top">
+        <caption>Выданные книги</caption>
+        <tbody>
+            <tr *ngFor="let book of takenBooks" (click)="selectBook(book.id)">
+                <td>{{book.title}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+<div class="taken_book__info w-50">
+    <p *ngIf="currentBook===null">
+        Для отображения информации о книге, выберите ее из списка слева.
+    </p>
+    <div *ngIf="currentBook!== null">
+    <table class="table caption-top">
+        <caption>Информация о книге</caption>
+        <tbody>
+            <tr>
+                <td>Название</td>
+                <td>{{currentBook.title}}</td>
+            </tr>
+            <tr>
+                <td>Автор</td>
+                <td>{{currentBook.author}}</td>
+            </tr>
+            <tr>
+                <td>Количество страниц</td>
+                <td>{{currentBook.pages}}</td>
+            </tr>
+            <tr>
+                <td>Год издания</td>
+                <td>{{currentBook.year}}</td>
+            </tr>
+            <tr>
+                <td>Выдана</td>
+                <td>{{currentBook.takenByInfo}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="returnBookToLibrary(currentBook.id)">Вернуть в библиотеку</button>
+</div>
+</div>
+</div>

@@ -9,6 +9,7 @@ import { WrapperComponent } from './pages/lending/wrapper/wrapper.component';
 import { ReaderDetailComponent } from './pages/lending/reader-detail/reader-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ReaderFormComponent } from './pages/lending/reader-form/reader-form.component';
+import { ReturnBookComponent } from './pages/lending/return-book/return-book.component';
 
 export const routes: Routes = [
     {
@@ -45,6 +46,11 @@ export const routes: Routes = [
                 path: 'reader/:id',
                 title: 'Выдача книг',
                 component: ReaderDetailComponent,
+            },
+            {
+                path: 'return-book',
+                title: 'Вернуть книги',
+                component: ReturnBookComponent,
             }
         ]
     },
