@@ -28,16 +28,18 @@
         <caption>
           Информация о выданных книгах
         </caption>
-        <tr>
-          <th>Название</th>
-          <th>Выдана</th>
-          <th>Возвращена</th>
-        </tr>
-        <tr *ngFor="let fact of reader?.lendingFacts">
-          <td>{{ fact.bookInfo }}</td>
-          <td>{{ fact.takenDate | date : "dd/MM/yyyy" }}</td>
-          <td>{{ fact.returnedDate | date : "dd/MM/yyyy" }}</td>
-        </tr>
+        <tbody>
+          <tr>
+            <th>Название</th>
+            <th>Выдана</th>
+            <th>Возвращена</th>
+          </tr>
+          <tr *ngFor="let fact of reader?.lendingFacts">
+            <td>{{ fact.bookInfo }}</td>
+            <td>{{ fact.takenDate | date : "dd/MM/yyyy" }}</td>
+            <td>{{ fact.returnedDate | date : "dd/MM/yyyy" }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <ng-template #elseBlock> Читатель еще не брал книг. </ng-template>

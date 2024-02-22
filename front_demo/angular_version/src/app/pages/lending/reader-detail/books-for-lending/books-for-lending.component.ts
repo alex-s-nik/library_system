@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Book } from '../../../../interfaces/book.inteface';
 
 @Component({
   selector: 'app-books-for-lending',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, NgIf],
   templateUrl: './books-for-lending.component.html',
   styleUrl: './books-for-lending.component.less'
 })

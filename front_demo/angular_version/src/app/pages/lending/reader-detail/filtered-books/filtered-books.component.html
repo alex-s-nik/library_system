@@ -1,16 +1,22 @@
 <div class="all-books">
-  <table class="table table-hover">
+  <table class="table table-hover caption-top">
     <caption>
-      …
+      Книги, доступные для выдачи
     </caption>
-
-    <tr
-      *ngFor="let book of untakenBooksList"
-      (click)="addBookToLendingList(book.id)"
-      class="cursor-pointer"
-    >
-      <td>{{ book.title }}</td>
-      <td>+</td>
-    </tr>
+    <tbody *ngIf="untakenBooksList.length">
+      <tr
+        *ngFor="let book of untakenBooksList"
+        (click)="addBookToLendingList(book.id)"
+        class="cursor-pointer"
+      >
+        <td>{{ book.title }}</td>
+        <td>+</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="!untakenBooksList.length">
+      <div>
+        <p>Нет свободных книг.</p>
+      </div>
+    </tbody>
   </table>
 </div>
