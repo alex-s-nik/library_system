@@ -1,68 +1,56 @@
 <div class="reader_lending__content_wrapper">
-    <div class="reader_lending__reader-info">
-        <div class="reader_lending__reader-info__name" id="reader_lending__reader-info__name">
-            <p><span class="bolded">{{reader?.name}}</span></p>
-            <p class="toRight">
-                <a href=""> Изменить</a> | <a href=""> Посмотреть профиль читателя</a>
-            </p>
-        </div>
-        <div class="reader_lending__reader-info__info" id="reader_lending__reader-info__info">
-            <p>
-                Читательский билет №{{reader?.card}}
-            </p>
-        </div>
-        <div *ngIf="reader?.lendingFacts?.length; else elseBlock" class="reader_lending__reader-info__books_info">
-            <table class="table caption-top" id="reader_lending__reader-info__books_info_table">
-                <caption>Информация о выданных книгах</caption>
-                <tr>
-                    <th>Название</th>
-                    <th>Выдана</th>
-                    <th>Возвращена</th>
-                </tr>
-                <tr *ngFor="let fact of reader?.lendingFacts">
-                    <td>{{fact.bookInfo}}</td>
-                    <td>{{fact.takenDate | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{fact.returnedDate | date: 'dd/MM/yyyy'}}</td>
-                </tr>
-            </table>
-        </div>
-        <ng-template #elseBlock>
-            Читатель еще не брал книг.
-        </ng-template>
+  <div class="reader_lending__reader-info">
+    <div
+      class="reader_lending__reader-info__name"
+      id="reader_lending__reader-info__name"
+    >
+      <p>
+        <span class="bolded">{{ reader?.name }}</span>
+      </p>
+      <p class="toRight">
+        <a href=""> Изменить</a> | <a href=""> Посмотреть профиль читателя</a>
+      </p>
     </div>
-    <div class="all-books">
-        <table class="table table-hover">
-            <tbody>
-            <tr>
-                <td>Кузьмин С. Я. Сомнительный горький ставить дьявол. / Кузьмин С. Я.; - 1950. - 1939 с.</td>
-                <td>+</td>
-            </tr>
-            <tr>
-                <td>Мартынов А. Р. Мрачно спорт покинуть. / Мартынов А. Р.; - 1982. - 2114 с.</td>
-                <td>+</td>
-            </tr>
-            <tr>
-                <td>Сафонова Д. В. Приятель обида пространство. / Сафонова Д. В.; - 1959. - 33 с.</td>
-                <td>+</td>
-            </tr>
-        </tbody>
-        </table>
+    <div
+      class="reader_lending__reader-info__info"
+      id="reader_lending__reader-info__info"
+    >
+      <p>Читательский билет №{{ reader?.card }}</p>
     </div>
-    <div class="books-for-lending">
-        <table class="table table-hover">
-            <tbody>
-            <tr>
-                <td>Сафонова Д. В. Приятель обида пространство 2. / Сафонова Д. В.; - 1960. - 15 с.</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>Комаров Е. Г. Помимо выраженный печатать сбросить. / Комаров Е. Г.; - 1977. - 1941 с.</td>
-                <td>-</td>
-            </tr>
-        </tbody>
-        </table>
+    <div
+      *ngIf="reader?.lendingFacts?.length; else elseBlock"
+      class="reader_lending__reader-info__books_info"
+    >
+      <table
+        class="table caption-top"
+        id="reader_lending__reader-info__books_info_table"
+      >
+        <caption>
+          Информация о выданных книгах
+        </caption>
+        <tr>
+          <th>Название</th>
+          <th>Выдана</th>
+          <th>Возвращена</th>
+        </tr>
+        <tr *ngFor="let fact of reader?.lendingFacts">
+          <td>{{ fact.bookInfo }}</td>
+          <td>{{ fact.takenDate | date : "dd/MM/yyyy" }}</td>
+          <td>{{ fact.returnedDate | date : "dd/MM/yyyy" }}</td>
+        </tr>
+      </table>
     </div>
-    <div class="lending-button">
-        <a href="#" class="btn btn-primary" role="button">Выдать</a>
-    </div>
+    <ng-template #elseBlock> Читатель еще не брал книг. </ng-template>
+  </div>
+  <app-filtered-books
+    [untakenBooksList]="untakenBooksList"
+    (changeUntakenList)="addBookToLendingListHandler($event)"
+  ></app-filtered-books>
+  <app-books-for-lending
+    [listForlendingBooks]="listForlendingBooks"
+    (changeLendingList)="removeBookFromOrderListHandler($event)"
+  ></app-books-for-lending>
+  <div class="lending-button">
+    <a href="#" class="btn btn-primary" role="button">Выдать</a>
+  </div>
 </div>

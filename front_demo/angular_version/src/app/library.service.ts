@@ -52,6 +52,16 @@ export class LibraryService {
     );
   }
 
+  /**
+   * Возвращает список невыданных книг фонда библиотеки.
+   * 
+   * @returns Список невыданных книг
+   */
+  getUntakenBooks(): Book[] {
+    const books: Book[] = this._libraryData.books;
+    return books.filter((book) => book.takenBy === null);
+  }
+
   takeBookToReader(readerId: number, bookId: number): void {
     const reader: Reader = this._libraryData.readers.find((r: Reader) => r.id === readerId);
     const book: Book = this._libraryData.books.find((b: Book) => b.id === bookId);
