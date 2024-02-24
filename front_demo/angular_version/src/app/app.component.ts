@@ -28,8 +28,7 @@ import { type LibraryService } from './library.service';
   styleUrl: './app.component.less'
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly libraryService: LibraryService) {
-  }
+  constructor(private readonly libraryService: LibraryService) { }
 
   ngOnInit(): void {
     this.libraryService.loadInitialDB();
