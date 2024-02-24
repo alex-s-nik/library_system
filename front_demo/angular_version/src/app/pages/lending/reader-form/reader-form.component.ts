@@ -10,7 +10,7 @@ import { type LibraryService } from '../../../library.service';
   styleUrl: './reader-form.component.less'
 })
 export class ReaderFormComponent {
-  constructor (
+  constructor(
     private readonly libraryService: LibraryService
   ) { }
 
@@ -25,8 +25,7 @@ export class ReaderFormComponent {
     ])
   });
 
-  create () {
-    console.log(this.newReaderForm);
+  create() {
     this.libraryService.createReader({
       name: this.newReaderForm.get('name')!.value!,
       card: this.newReaderForm.get('card')!.value!
