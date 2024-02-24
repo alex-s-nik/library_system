@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
-import { Book } from '../../../../interfaces/book.inteface';
+import { type Book } from '../../../../interfaces/book.inteface';
 
 @Component({
   selector: 'app-filtered-books',
@@ -13,7 +13,7 @@ export class FilteredBooksComponent {
   @Input() untakenBooksList: Book[] = [];
   @Output() changeUntakenList = new EventEmitter<number>();
 
-  addBookToLendingList(bookId: number): void {
-    this.changeUntakenList.emit(bookId);
+  addBookToLendingList (bookId: number): void {
+  	this.changeUntakenList.emit(bookId);
   }
 }

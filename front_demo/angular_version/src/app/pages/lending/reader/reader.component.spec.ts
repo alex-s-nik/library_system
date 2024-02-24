@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReaderComponent } from './reader.component';
 
@@ -10,8 +10,8 @@ describe('ReaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ReaderComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ReaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

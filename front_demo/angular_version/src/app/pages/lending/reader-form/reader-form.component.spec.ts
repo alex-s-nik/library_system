@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReaderFormComponent } from './reader-form.component';
 
@@ -10,8 +10,8 @@ describe('ReaderFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ReaderFormComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ReaderFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

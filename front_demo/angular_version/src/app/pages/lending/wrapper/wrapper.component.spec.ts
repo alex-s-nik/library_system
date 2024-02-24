@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WrapperComponent } from './wrapper.component';
 
@@ -10,8 +10,8 @@ describe('WrapperComponent', () => {
     await TestBed.configureTestingModule({
       imports: [WrapperComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(WrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReturnBookComponent } from './return-book.component';
 
@@ -10,8 +10,8 @@ describe('ReturnBookComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ReturnBookComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ReturnBookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

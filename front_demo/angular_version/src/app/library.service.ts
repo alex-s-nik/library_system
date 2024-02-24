@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Reader } from './interfaces/reader.inteface';
-import { Book } from './interfaces/book.inteface';
-import { LendingFact } from './interfaces/lenging-fact.inteface';
+import { type HttpClient } from '@angular/common/http';
+import { type Observable, of } from 'rxjs';
+import { type Reader } from './interfaces/reader.inteface';
+import { type Book } from './interfaces/book.inteface';
+import { type LendingFact } from './interfaces/lenging-fact.inteface';
 import * as bookData from '../assets/data.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryService {
-  
-  constructor(private httpClient: HttpClient) { 
+  constructor(private readonly httpClient: HttpClient) {
     this.loadInitialDB();
-    }
-    
-  private _last_reader_id: number = 0;
-  private _libraryData: any;
+  }
 
+  private _last_reader_id: number = 0;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _libraryData: any;
 
   loadInitialDB(): void {
     this._libraryData = bookData;
@@ -28,7 +27,7 @@ export class LibraryService {
     return of(
       readers.filter(
         (reader) => (
-          reader['name'].toLowerCase().includes(pattern.toLowerCase()) || reader['card'].toLowerCase().includes(pattern.toLowerCase())
+          reader.name.toLowerCase().includes(pattern.toLowerCase()) || reader.card.toLowerCase().includes(pattern.toLowerCase())
         )
       )
     );
@@ -50,7 +49,7 @@ export class LibraryService {
 
   /**
    * Возвращает список невыданных книг фонда библиотеки.
-   * 
+   *
    * @returns Список невыданных книг
    */
   getUntakenBooks(): Book[] {
@@ -69,12 +68,12 @@ export class LibraryService {
 
     const lendingFact: LendingFact = {
       id: 9999,
-      'bookId': bookId,
-      'bookInfo': `${book.author} ${book.title} / ${book.author}; - ${book.year}. - ${book.pages} с.`,
-      'takenDate': new Date(),
-      'returnedDate': null
+      bookId,
+      bookInfo: `${book.author} ${book.title} / ${book.author}; - ${book.year}. - ${book.pages} с.`,
+      takenDate: new Date(),
+      returnedDate: null
 
-    }
+    };
     reader.lendingFacts.push(lendingFact);
     book.takenBy = reader.id;
     book.takenByInfo = reader.name;
@@ -83,7 +82,7 @@ export class LibraryService {
   lendListBooksToReader(listBooks: Book[], reader: Reader): void {
     let currentLendingFact: LendingFact;
 
-    for (let book of listBooks) {
+    for (const book of listBooks) {
       book.takenBy = reader.id;
       book.takenByInfo = reader.name;
 
@@ -93,12 +92,12 @@ export class LibraryService {
         bookInfo: `${book.author} ${book.title} / ${book.author}; - ${book.year}. - ${book.pages} с.`,
         takenDate: new Date(),
         returnedDate: null
-      }
+      };
       reader.lendingFacts.push(currentLendingFact);
     }
   }
 
-  createReader(readerDto: ReaderCreateDto):void {
+  createReader(readerDto: ReaderCreateDto): void {
     const reader: Reader = {
       id: this._last_reader_id++,
       name: readerDto.name,
@@ -107,14 +106,15 @@ export class LibraryService {
     };
     this._libraryData.readers.push(reader);
   }
+
   returnBookToLibrary(bookId: number): void {
     const book: Book = this._libraryData.books.find((book: Book) => book.id === bookId);
 
     book.takenBy = null;
     book.takenByInfo = null;
 
-    for (let reader of this._libraryData.readers) {
-      for (let lendingFact of reader.lendingFacts) {
+    for (const reader of this._libraryData.readers) {
+      for (const lendingFact of reader.lendingFacts) {
         if (lendingFact.bookId === bookId && lendingFact.returnedDate === null) {
           lendingFact.returnedDate = new Date();
           return;
@@ -124,8 +124,7 @@ export class LibraryService {
   }
 }
 
-
-export type ReaderCreateDto = {
-  name: string;
-  card: string;
+export interface ReaderCreateDto {
+  name: string
+  card: string
 }
