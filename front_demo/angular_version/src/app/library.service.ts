@@ -10,13 +10,13 @@ import * as bookData from '../assets/data.json';
   providedIn: 'root'
 })
 export class LibraryService {
-  constructor(private readonly httpClient: HttpClient) {
-    this.loadInitialDB();
-  }
-
   private _last_reader_id: number = 0;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _libraryData: any;
+
+  constructor(private readonly httpClient: HttpClient) {
+    this.loadInitialDB();
+  }
 
   loadInitialDB(): void {
     this._libraryData = bookData;
