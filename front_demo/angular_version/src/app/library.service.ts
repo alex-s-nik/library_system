@@ -15,10 +15,6 @@ export class LibraryService {
   private _libraryData: any;
 
   constructor(private readonly httpClient: HttpClient) {
-    this.loadInitialDB();
-  }
-
-  loadInitialDB(): void {
     this._libraryData = bookData;
   }
 
