@@ -1,4 +1,4 @@
-import { Component, type OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AcquisitionComponent } from './pages/acquisition/acquisition.component';
@@ -7,7 +7,6 @@ import { MainComponent } from './pages/main/main.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { ReaderComponent } from './pages/lending/reader/reader.component';
 import { MenuComponent } from './pages/_shared/menu/menu.component';
-import { type LibraryService } from './library.service';
 
 @Component({
   selector: 'app-root',
@@ -27,10 +26,4 @@ import { type LibraryService } from './library.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
-export class AppComponent implements OnInit {
-  constructor(private readonly libraryService: LibraryService) { }
-
-  ngOnInit(): void {
-    this.libraryService.loadInitialDB();
-  }
-}
+export class AppComponent { }
