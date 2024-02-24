@@ -1,5 +1,5 @@
 import { Component, type OnInit } from '@angular/core';
-import { type ActivatedRoute, Route, type Router } from '@angular/router';
+import { type ActivatedRoute, type Router } from '@angular/router';
 import { NgIf, NgFor, DatePipe } from '@angular/common';
 
 import { type LibraryService } from '../../../library.service';
@@ -7,7 +7,7 @@ import { type Reader } from '../../../interfaces/reader.inteface';
 import { type Book } from '../../../interfaces/book.inteface';
 import { FilteredBooksComponent } from './filtered-books/filtered-books.component';
 import { BooksForLendingComponent } from './books-for-lending/books-for-lending.component';
-import { log } from 'console';
+
 
 @Component({
   selector: 'app-reader-detail',
@@ -25,9 +25,9 @@ export class ReaderDetailComponent implements OnInit {
   // список книг, помеченных для выдачи текущему читателю
   public listForlendingBooks: Book[] = [];
 
-  constructor (private readonly libraryService: LibraryService, private readonly route: ActivatedRoute, private readonly router: Router) { }
+  constructor(private readonly libraryService: LibraryService, private readonly route: ActivatedRoute, private readonly router: Router) { }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
     this.getReader();
     if (!this.reader) {
       this.router.navigate(['/404']);
@@ -35,39 +35,29 @@ export class ReaderDetailComponent implements OnInit {
     this.untakenBooksList = this.getUntakenBooks();
   }
 
-  getReader (): void {
+  getReader(): void {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     this.libraryService.getReaderById(id).subscribe(reader => this.reader = reader);
   }
 
-  findBooks (event: Event): void {
+  findBooks(event: Event): void {
     const findPattern: string = (event.target as HTMLInputElement).value;
     this.findBooksByPattern(findPattern);
   }
 
-  findBooksByPattern (findPattern: string): void {
+  findBooksByPattern(findPattern: string): void {
     this.libraryService.getBooksUntakenByPattern(findPattern).subscribe(
       books => this.books = books
     );
   }
 
-  takeBook (readerId: number, bookId: number): void {
+  takeBook(readerId: number, bookId: number): void {
     this.libraryService.takeBookToReader(readerId, bookId);
   }
 
-  lendListBooksToReader (): void {
+  lendListBooksToReader(): void {
     this._lendListBooksToReader(this.listForlendingBooks, this.reader!);
     this.listForlendingBooks = [];
-  }
-
-  /**
-   * Выдать книги читателю reader из списка для выдачи книг текущему читателю.
-   *
-   * @param listBooks список книг, которые будут выданы
-   * @param reader читатель
-   */
-  _lendListBooksToReader (listBooks: Book[], reader: Reader): void {
-    this.libraryService.lendListBooksToReader(listBooks, reader);
   }
 
   /**
@@ -75,7 +65,7 @@ export class ReaderDetailComponent implements OnInit {
    *
    * @returns Список невыданных книг
    */
-  getUntakenBooks (): Book[] {
+  getUntakenBooks(): Book[] {
     return this.libraryService.getUntakenBooks();
   }
 
@@ -84,7 +74,7 @@ export class ReaderDetailComponent implements OnInit {
    *
    * @param bookId id невыданной книги
    */
-  addBookToLendingListHandler (bookId: number): void {
+  addBookToLendingListHandler(bookId: number): void {
     this.addBookToLendingList(bookId);
   }
 
@@ -94,7 +84,7 @@ export class ReaderDetailComponent implements OnInit {
    *
    * @param bookTitle id книги из списка книг для выдачи текущему читателю
    */
-  removeBookFromOrderListHandler (bookId: number): void {
+  removeBookFromOrderListHandler(bookId: number): void {
     this.removeBookFromOrderList(bookId);
   }
 
@@ -104,7 +94,7 @@ export class ReaderDetailComponent implements OnInit {
    *
    * @param bookId id невыданной книги
    */
-  addBookToLendingList (bookId: number): void {
+  addBookToLendingList(bookId: number): void {
     this._moveBookBetweenLists(bookId, this.untakenBooksList, this.listForlendingBooks);
   }
 
@@ -114,7 +104,7 @@ export class ReaderDetailComponent implements OnInit {
    *
    * @param bookId id невыданной книги
    */
-  removeBookFromOrderList (bookId: number): void {
+  removeBookFromOrderList(bookId: number): void {
     this._moveBookBetweenLists(bookId, this.listForlendingBooks, this.untakenBooksList);
   }
 
@@ -125,10 +115,20 @@ export class ReaderDetailComponent implements OnInit {
    * @param fromList список, из которого надо переместить
    * @param toList список, в который надо переместить
    */
-  _moveBookBetweenLists (bookId: number, fromList: Book[], toList: Book[]): void {
+  _moveBookBetweenLists(bookId: number, fromList: Book[], toList: Book[]): void {
     const book: Book = fromList.find(book => book.id === bookId)!;
     const index: number = fromList.indexOf(book);
     fromList.splice(index, 1);
     toList.push(book);
+  }
+
+  /**
+   * Выдать книги читателю reader из списка для выдачи книг текущему читателю.
+   *
+   * @param listBooks список книг, которые будут выданы
+   * @param reader читатель
+   */
+  _lendListBooksToReader(listBooks: Book[], reader: Reader): void {
+    this.libraryService.lendListBooksToReader(listBooks, reader);
   }
 }
