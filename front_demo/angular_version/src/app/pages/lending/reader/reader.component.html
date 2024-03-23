@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <div class="title">
+    <h1>Поиск читателя</h1>
+  </div>
+  <div class="find-reader">
+    <div class="input-group">
+      <input (input)="findReaderByNameOrCard($event)" id="find-reader_input" type="text" class="form-control"
+        placeholder="ФИО читателя или номер его читательского билета...">
+      <button class="btn btn-outline-secondary" type="button"
+        id="button-addon2">Найти</button>
+    </div>
+  </div>
+  <div id="find_reader_result">
+    <p class="find_results__reader" *ngFor="let searchResult of searchResults">
+      <a routerLink="{{searchResult.reader_id}}" class="btn btn-light" role="button">
+        {{searchResult.textBeforeHighlight}}<span class="find-reader__highlighted-text">{{searchResult.highlightedText}}</span>{{searchResult.textAfterHighlight}}
+      </a>
+    </p>
+  </div>
+  <div class="new_reader_card">... или <a href="#"> создайте карточку нового
+      читателя</a>
+  </div>
+</div>

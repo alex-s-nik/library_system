@@ -478,3 +478,48 @@ class TestAPIActions:
 
     def test_returning_book(self):
         pass
+
+class TestBooksTakenByVisitors:
+    def test_all_books_currently_are_at_visitor(self, first_user_client, book1, visitor1):
+        response = first_user_client.post(
+            f'/api/v1/books/{book1.id}/taken_by/{visitor1.id}/',
+            {
+                'book': book1,
+                'visitor': visitor1
+            }
+        )
+
+        response = first_user_client.get(
+            f'/api/v1/visitors/{visitor1.id}/books/'
+        )
+
+        assert response.status_code == status.HTTP_200_OK, (
+            'Статус код списка книг, находящихся у читателя'
+            'отличается от 200'
+        )
+
+        response_data = response.json()
+
+        assert 'visitor' in response_data, (
+            'В ответе нет информации о посетителе'
+        )
+
+        assert all([field in response_data['visitor'] for field in ('id', 'name', 'info', 'created_at', 'created_by')]), (
+            'В ответе нет нужных полей в информации о посетителе.'
+        )
+
+        assert 'books' in response_data, (
+            'В ответе нет информации о взятых книгах.'
+        )
+
+        assert isinstance(response_data['books'], list), (
+            'Информация о книгах не является массивом.'
+        )
+
+        assert len(response_data['books']) == 1, (
+            'Количество книг на руках отличается от действительного.'
+        )
+
+        assert all([field in response_data['books'][0] for field in ('id', 'title', 'description')]), (
+            'В ответе нет нужных полей в информации о книге на руках.'
+        )

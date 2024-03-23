@@ -1,0 +1,48 @@
+        
+name: 'CI for Demo Front Library v.2'	
+
+on:	
+    push:	
+        branches: [frontend_demo]
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+              working-directory: 'front_demo/angular_version'
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 21
+
+        - name: Cache npm dependencies
+          uses: actions/cache@v2
+          with:
+            path: '~/.npm'
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+                ${{ runner.os }}-node-
+
+        - name: Install dependencies and Angular
+          run:  |
+            npm i -g @angular/cli
+            npm install
+        
+        - name: Build
+          run: ng build
+        
+        - name: Copy file via SSH
+          uses: appleboy/scp-action@v0.1.7	
+          with:	
+            host: ${{ secrets.FRONT_DEMO_SSH_HOST }}	
+            username: ${{ secrets.FRONT_DEMO_SSH_USERNAME }}	
+            key: ${{ secrets.FRONT_DEMO_SSH_KEY }}	
+            port: ${{ secrets.FRONT_DEMO_SSH_PORT }}	
+            source: "front_demo/angular_version/dist/angular_version/browser/*"	
+            target: "/var/www/html"
+            rm: true
+            strip_components: 5

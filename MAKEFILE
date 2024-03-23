@@ -1,6 +1,9 @@
 add_superuser:
 	docker compose -f docker-compose_prod.yml run --rm backend python manage.py add_superuser
 
+add_fakedata:
+	docker compose -f docker-compose_prod.yml run --rm backend python manage.py add_data
+
 migrate:
 	docker compose -f docker-compose_prod.yml run --rm backend python manage.py migrate
 
