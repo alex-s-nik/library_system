@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { type LibraryService } from '../../../library.service';
+import { LibraryService } from '../../../library.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reader-form',
@@ -11,7 +12,8 @@ import { type LibraryService } from '../../../library.service';
 })
 export class ReaderFormComponent {
   constructor(
-    private readonly libraryService: LibraryService
+    private readonly libraryService: LibraryService,
+    private readonly router: Router
   ) { }
 
   newReaderForm = new FormGroup({
@@ -30,5 +32,7 @@ export class ReaderFormComponent {
       name: this.newReaderForm.get('name')!.value!,
       card: this.newReaderForm.get('card')!.value!
     });
+
+    this.router.navigate(['lending/reader']);
   }
 }
