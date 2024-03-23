@@ -1,0 +1,25 @@
+<div class="books-for-lending">
+  <table class="table table-hover caption-top">
+    <caption>
+      Книги, которые будут выданы читателю
+    </caption>
+    <tbody *ngIf="listForlendingBooks.length">
+      <tr
+        *ngFor="let book of listForlendingBooks"
+        (click)="removeBookFromLendingList(book.id)"
+        class="cursor-pointer"
+      >
+        <td>{{ book.title }}</td>
+        <td>-</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="!listForlendingBooks.length">
+      <tr>
+        <td>
+          Не выбрано ни одной книги.
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

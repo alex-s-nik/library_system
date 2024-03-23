@@ -1,8 +1,9 @@
 export interface Book {
-    id: number;
-    title: string;
-    author: string;
-    pages: number;
-    year: number;
-    takenBy: number;
+  id: number
+  title: string
+  author: string
+  pages: number
+  year: number
+  takenBy: number | null
+  takenByInfo: string | null
 }

@@ -1,32 +1,34 @@
 .reader_lending__content_wrapper {
     display: flex;
+    flex-direction: column;
     width: 98vw;
     height: 100vh;
+    margin-left: 40px;
     
-}
-
-.reader_lending__lending {
-    background-color: blueviolet;
-    width: 50%;
-
 }
 
 .reader_lending__reader-info {
     /*background-color: brown;*/
-    width: 50%;
+    width: 100%;
     padding: 15px;
 
 }
 
 .reader_lending__reader-info__name {
-    text-align: right;
+    display: flex;
+    border-bottom: 3px solid black;
+}
+.toRight {
+    margin-left: auto;
+}
+.bolded {
+    margin: 0 10px;
+    // text-align: right;
     font-size: large;
     font-weight: 800;
-    border-bottom: 3px solid black;
-    margin: 0 10px;
 }
 
 .reader_lending__reader-info__info {
     padding-top: 20px;
-    text-align: right;
+    // text-align: right;
 }

@@ -1,6 +1,7 @@
 export interface LendingFact {
-    id: number;
-    bookId: number;
-    takenDate: Date;
-    returnedDate: Date | null;
+  id: number
+  bookId: number
+  bookInfo: string
+  takenDate: Date
+  returnedDate: Date | null
 }

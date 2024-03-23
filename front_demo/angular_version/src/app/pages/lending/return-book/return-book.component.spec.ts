@@ -1,18 +1,18 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WrapperComponent } from './wrapper.component';
+import { ReturnBookComponent } from './return-book.component';
 
-describe('WrapperComponent', () => {
-  let component: WrapperComponent;
-  let fixture: ComponentFixture<WrapperComponent>;
+describe('ReturnBookComponent', () => {
+  let component: ReturnBookComponent;
+  let fixture: ComponentFixture<ReturnBookComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WrapperComponent]
+      imports: [ReturnBookComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(WrapperComponent);
+    fixture = TestBed.createComponent(ReturnBookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

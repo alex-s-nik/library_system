@@ -1,18 +1,18 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WrapperComponent } from './wrapper.component';
+import { ReaderFormComponent } from './reader-form.component';
 
-describe('WrapperComponent', () => {
-  let component: WrapperComponent;
-  let fixture: ComponentFixture<WrapperComponent>;
+describe('ReaderFormComponent', () => {
+  let component: ReaderFormComponent;
+  let fixture: ComponentFixture<ReaderFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WrapperComponent]
+      imports: [ReaderFormComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(WrapperComponent);
+    fixture = TestBed.createComponent(ReaderFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
