@@ -32,4 +32,4 @@ class ActionAdmin(admin.ModelAdmin):
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Visitor, VisitorAdmin)
-admin.site.register(Action, ActionAdmin)
+#admin.site.register(Action, ActionAdmin)
