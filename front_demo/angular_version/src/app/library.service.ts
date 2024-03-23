@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { type HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { type Observable, of } from 'rxjs';
 import { type Reader } from './interfaces/reader.inteface';
 import { type Book } from './interfaces/book.inteface';

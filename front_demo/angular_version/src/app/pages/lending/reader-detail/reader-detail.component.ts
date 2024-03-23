@@ -1,8 +1,8 @@
-import { Component, type OnInit } from '@angular/core';
-import { type ActivatedRoute, type Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgIf, NgFor, DatePipe } from '@angular/common';
 
-import { type LibraryService } from '../../../library.service';
+import { LibraryService } from '../../../library.service';
 import { type Reader } from '../../../interfaces/reader.inteface';
 import { type Book } from '../../../interfaces/book.inteface';
 import { FilteredBooksComponent } from './filtered-books/filtered-books.component';

@@ -2,7 +2,7 @@ import { Component, type OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 
 import { type Book } from '../../../interfaces/book.inteface';
-import { type LibraryService } from '../../../library.service';
+import { LibraryService } from '../../../library.service';
 
 @Component({
   selector: 'app-return-book',
@@ -15,17 +15,17 @@ export class ReturnBookComponent implements OnInit {
   currentBook: Book | null = null;
   takenBooks: Book[] = [];
 
-  constructor (private readonly _libraryService: LibraryService) { }
+  constructor(private readonly _libraryService: LibraryService) { }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
     this.takenBooks = this._libraryService.getTakenBooks();
   }
 
-  selectBook (bookId: number): void {
+  selectBook(bookId: number): void {
     this.currentBook = this.takenBooks.find((book) => book.id === bookId)!;
   }
 
-  returnBookToLibrary (bookId: number): void {
+  returnBookToLibrary(bookId: number): void {
     this._libraryService.returnBookToLibrary(bookId);
   }
 }

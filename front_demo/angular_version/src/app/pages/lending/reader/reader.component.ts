@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { type SearchReaderResult } from '../../../interfaces/search-result.interface';
 
 import { readerIntoSearchResult } from '../../../tools/reader-into-search-result.tool';
-import { type LibraryService } from '../../../library.service';
+import { LibraryService } from '../../../library.service';
 
 @Component({
   selector: 'app-reader',
@@ -19,9 +19,9 @@ export class ReaderComponent {
 
   searchedText?: string;
 
-  constructor (private readonly libraryService: LibraryService) { }
+  constructor(private readonly libraryService: LibraryService) { }
 
-  findReaderByNameOrCard (event: Event): void {
+  findReaderByNameOrCard(event: Event): void {
     const findPattern: string = (event.target as HTMLInputElement).value;
     this.libraryService.getReaderByNameOrCard(findPattern).subscribe(
       findedReaders => this.searchResults = findedReaders.map((reader) => readerIntoSearchResult(reader, findPattern))
