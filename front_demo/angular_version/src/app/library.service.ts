@@ -118,6 +118,14 @@ export class LibraryService {
       }
     }
   }
+
+  getAllBooks(): Book[] {
+    return this._libraryData.books;
+  }
+
+  getBookById(id: number): Book {
+    return this._libraryData.books.find((book: Book) => book.id == id)!;
+  }
 }
 
 export interface ReaderCreateDto {

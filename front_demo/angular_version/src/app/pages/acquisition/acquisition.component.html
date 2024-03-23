@@ -1,1 +1,54 @@
-<p>acquisition works!</p>
+<div class="row">
+    <div class="col">
+        <h1>Комплектование</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Книги</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <td (click)="setCurrent(book.id)" [class]="(book.takenBy) ? 'bg-light' : ''">
+                        {{book.title}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+        <h5>Информация о книге</h5>
+        <div class="" *ngIf="currentBook; else noBookSelected">
+
+            <p>
+                Название: {{currentBook.title}}
+            </p>
+            <p>
+                Автор: {{currentBook.author}}
+            </p>
+            <p>
+                Количество страниц: {{currentBook.pages}}
+            </p>
+            <p>
+                Год издания: {{currentBook.year}}
+            </p>
+            <div class="" *ngIf="currentBook.takenBy">
+                <p>
+                    Книга на руках у <a routerLink="/lending/reader/{{currentBook.takenBy}}">{{currentBook.takenByInfo}}</a>
+                </p>
+            </div>
+            <button class="btn btn-primary">Изменить книгу (not worked)</button>
+            <button class="btn btn-danger">Удалить книгу (not worked)</button>
+        </div>
+        <ng-template #noBookSelected>
+            <div class="">
+                Выберите книгу из списка слева.
+            </div>
+        </ng-template>
+        <button class="btn btn-primary">Создать новую (not worked)</button>
+    </div>
+</div>
